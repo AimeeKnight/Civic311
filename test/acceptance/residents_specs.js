@@ -6,6 +6,8 @@ var request = require('supertest');
 var expect = require('chai').expect;
 var Resident;
 var bob;
+var residentId;
+var cookie;
 
 describe('residents', function(){
 
@@ -20,8 +22,9 @@ describe('residents', function(){
 
   beforeEach(function(done){
     global.nss.db.dropDatabase(function(err, result){
-      bob = new Resident({role:'host', email:'bob@nomail.com', password:'1234'});
+      bob = new Resident({name:'Bob', email:'bob@nomail.com', password:'1234'});
       bob.register(function(){
+        residentId = bob._id.toString();
         done();
       });
     });
@@ -100,6 +103,32 @@ describe('residents', function(){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('Login');
         done();
+      });
+    });
+  });
+
+  describe('AUTHORIZED', function(){
+    beforeEach(function(done){
+      request(app)
+      .post('/login')
+      .field('name', 'Sue')
+      .field('email', 'testsue@nomail.com')
+      .field('password', 'abcd')
+      .end(function(err, res){
+        cookie = res.headers['set-cookie'];
+        done();
+      });
+    });
+
+    describe('GET /residents/:id', function(){
+      it('should show a resident page when logged in', function(done){
+        request(app)
+        .get('/residents/' + residentId)
+        .set('cookie', cookie)
+        .end(function(err, res){
+          expect(res.status).to.equal(200);
+          done();
+        });
       });
     });
   });

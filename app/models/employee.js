@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = Employee;
+var Mongo = require('mongodb');
 var bcrypt = require('bcrypt');
 var employees = global.nss.db.collection('employees');
 var email = require('../lib/email');
@@ -38,6 +39,16 @@ Employee.prototype.register = function(fn){
     });
   });
 };
+
+
+Employee.findById = function(id, fn){
+  var _id = Mongo.ObjectID(id);
+
+  employees.findOne({_id:_id}, function(err, record){
+    fn(record);
+  });
+};
+
 
 Employee.findByEmailAndPassword = function(email, password, fn){
   employees.findOne({email:email}, function(err, employee){

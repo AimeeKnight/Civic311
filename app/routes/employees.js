@@ -36,3 +36,8 @@ exports.authenticate = function(req, res){
   });
 };
 
+exports.show = function(req, res){
+  Employee.findById(req.session.userId, function(employee){
+    res.render('employees/show', {employee:employee});
+  });
+};

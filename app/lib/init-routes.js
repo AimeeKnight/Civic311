@@ -24,12 +24,14 @@ function load(app, fn){
   app.post('/register', d, residents.create);
   app.get('/login', d, residents.login);
   app.post('/login', d, residents.authenticate);
+  app.get('/residents/:id', d, residents.show);
 
   ////////// EMPLOYEES //////////
   app.get('/admin/register', d, employees.fresh);
   app.post('/admin/register', d, employees.create);
   app.get('/admin/login', d, employees.login);
   app.post('/admin/login', d, employees.authenticate);
+  app.get('/employees/:id', d, employees.show);
 
   ////////// REPORTS //////////
   app.get('/reports/new', d, reports.fresh);

@@ -1,6 +1,7 @@
 'use strict';
 
 var Resident = require('../models/resident');
+var gravatar = require('gravatar');
 
 exports.fresh = function(req, res){
   res.render('residents/fresh', {title: 'Register Resident'});
@@ -36,3 +37,12 @@ exports.authenticate = function(req, res){
   });
 };
 
+exports.show = function(req, res){
+  console.log('!!!!!!!!!!!');
+  console.log(req.params);
+  console.log('!!!!!!!!!!!');
+  Resident.findById(req.params.id, function(resident){
+    var url = gravatar.url(resident.email, {s: '200', r: 'pg'});
+    res.render('residents/show', {resident:resident, gravatar: url});
+  });
+};

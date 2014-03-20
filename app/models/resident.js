@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = Resident;
+var Mongo = require('mongodb');
 var bcrypt = require('bcrypt');
 var residents = global.nss.db.collection('residents');
 var email = require('../lib/email');
@@ -17,9 +18,9 @@ var email = require('../lib/email');
  * ---------------------------------- */
 
 function Resident(resident){
-  this.name = resident.name;
-  this.email = resident.email;
-  this.password = resident.password;
+  this.name = resident.name || '';
+  this.email = resident.email || '';
+  this.password = resident.password || '';
 }
 
 Resident.prototype.register = function(fn){
@@ -36,6 +37,14 @@ Resident.prototype.register = function(fn){
         fn();
       }
     });
+  });
+};
+
+Resident.findById = function(id, fn){
+  var _id = Mongo.ObjectID(id);
+
+  residents.findOne({_id:_id}, function(err, record){
+    fn(record);
   });
 };
 

@@ -113,10 +113,8 @@ describe('reports', function(){
 
   describe('POST /reports/3', function(){
     it('should edit a report and send user back to home', function(done){
-      //var filename = __dirname + '/../fixtures/euro-copy1.jpg';
       request(app)
       .post('/reports')
-      //.attach('cover', filename)
       .field('name', 'Test Report1')
       .field('date', '2014-02-25')
       .field('description', 'Report1 Description')

@@ -6,6 +6,8 @@ var request = require('supertest');
 var expect = require('chai').expect;
 var employee;
 var bob;
+var employeeId;
+var cookie;
 
 describe('employees', function(){
 
@@ -20,8 +22,9 @@ describe('employees', function(){
 
   beforeEach(function(done){
     global.nss.db.dropDatabase(function(err, result){
-      bob = new employee({role:'host', email:'bob@nomail.com', password:'1234'});
+      bob = new employee({email:'bob@nomail.com', password:'1234'});
       bob.register(function(){
+        employeeId = bob._id.toString();
         done();
       });
     });
@@ -100,6 +103,31 @@ describe('employees', function(){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('Login');
         done();
+      });
+    });
+  });
+
+  describe('AUTHORIZED', function(){
+    beforeEach(function(done){
+      request(app)
+      .post('/login')
+      .field('email', 'testsue@nomail.com')
+      .field('password', 'abcd')
+      .end(function(err, res){
+        cookie = res.headers['set-cookie'];
+        done();
+      });
+    });
+
+    describe('GET /employees:id', function(){
+      it('should login a user', function(done){
+        request(app)
+        .get('/employees/' + employeeId)
+        .set('cookie', cookie)
+        .end(function(err, res){
+          expect(res.status).to.equal(200);
+          done();
+        });
       });
     });
   });
