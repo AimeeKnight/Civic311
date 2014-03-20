@@ -55,8 +55,8 @@ Report.findAll = function(fn){
 Report.findById = function(id, fn){
   var _id = Mongo.ObjectID(id);
 
-  reports.findOne({_id:_id}, function(err, record){
-    fn(_.extend(record, Report.prototype));
+  reports.findOne({_id:_id}, function(err, report){
+    fn(_.extend(report, Report.prototype));
   });
 };
 

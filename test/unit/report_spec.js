@@ -5,6 +5,7 @@ var expect = require('chai').expect;
 var fs = require('fs');
 var exec = require('child_process').exec;
 var Report;
+//var reportId;
 
 describe('Report', function(){
 
@@ -27,7 +28,7 @@ describe('Report', function(){
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy1file));
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy2file));
       global.nss.db.dropDatabase(function(err, result){
-        global.nss.db.collection('listings').ensureIndex({'coordinates':'2dsphere'}, function(err, indexName){
+        global.nss.db.collection('reports').ensureIndex({'coordinates':'2dsphere'}, function(err, indexName){
           done();
         });
       });
@@ -39,6 +40,8 @@ describe('Report', function(){
       var o = {};
       o.name = 'Test Report1';
       o.date = '2010-03-25';
+      o.lat = '32';
+      o.lng = '32';
       var r1 = new Report(o);
       expect(r1).to.be.instanceof(Report);
       expect(r1.name).to.equal('Test Report1');
@@ -51,6 +54,8 @@ describe('Report', function(){
       var o = {};
       o.name = 'Test Report1';
       o.date = '2010-03-25';
+      o.lat = '32';
+      o.lng = '32';
       var r1 = new Report(o);
       var oldname = __dirname + '/../fixtures/euro-copy1.jpg';
       r1.addPhoto(oldname);
@@ -63,6 +68,8 @@ describe('Report', function(){
       var o = {};
       o.name = 'Test Report1';
       o.date = '2010-03-25';
+      o.lat = '32';
+      o.lng = '32';
       var r1 = new Report(o);
       var oldname = __dirname + '/../fixtures/euro-copy1.jpg';
       r1.addPhoto(oldname);
@@ -78,6 +85,8 @@ describe('Report', function(){
       var o = {};
       o.name = 'Test Report1';
       o.date = '2010-03-25';
+      o.lat = '32';
+      o.lng = '32';
       var r1 = new Report(o);
       var oldname = __dirname + '/../fixtures/euro-copy1.jpg';
       r1.addPhoto(oldname);
@@ -98,9 +107,9 @@ describe('Report', function(){
     var r1, r2, r3;
 
     beforeEach(function(done){
-      r1 = new Report({name:'Test ReportA', taken:'2012-03-25'});
-      r2 = new Report({name:'Test ReportB', taken:'2012-03-26'});
-      r3 = new Report({name:'Test ReportC', taken:'2012-03-27'});
+      r1 = new Report({name:'Test ReportA', taken:'2012-03-25', lat:'30', lng:'60'});
+      r2 = new Report({name:'Test ReportB', taken:'2012-03-26', lat:'40', lng:'70'});
+      r3 = new Report({name:'Test ReportC', taken:'2012-03-27', lat:'50', lng:'80'});
 
       r1.insert(function(){
         r2.insert(function(){
@@ -130,27 +139,26 @@ describe('Report', function(){
         });
       });
     });
+  });
 
-    describe('.findByGeo', function(){
-      it('should find closest closet by location', function(done){
-        r2 = new Report({name:'Test Report2',
-                           taken: '2012-03-25',
-                           lat: '30',
-                           lng: '30',
-                           address: '123 Main Street'});
-        r3 = new Report({name:'Test Report3',
-                           taken: '2012-03-26',
-                           lat: '40',
-                           lng: '40',
-                           address: '456 Main Street'});
-        r2.insert(function(report2){
-          r3.insert(function(report3){
-            var object = {lat: 32, lng:32};
-            Report.findByGeo(object, function(reports){
-              console.log(reports);
-              expect(reports[0].name).to.equal('Test Report2');
-              done();
-            });
+  describe('.findByGeo', function(){
+    it('should find closest closet by location', function(done){
+      var r2 = new Report({name:'Test Report2',
+                         taken: '2012-03-25',
+                         lat: '30',
+                         lng: '30',
+                         address: '123 Main Street'});
+      var r3 = new Report({name:'Test Report3',
+                         taken: '2012-03-26',
+                         lat: '40',
+                         lng: '40',
+                         address: '456 Main Street'});
+      r2.insert(function(report2){
+        r3.insert(function(report3){
+          var object = {lat: 32, lng:32};
+          Report.findByGeo(object, function(reports){
+            expect(reports[0].name).to.equal('Test Report2');
+            done();
           });
         });
       });

@@ -18,7 +18,7 @@ exports.db = function(fn){
     if(err){throw err;}
     global.nss = {};
     global.nss.db = db;
-    global.nss.db.collection('listings').ensureIndex({'coordinates':'2dsphere'}, function(err, indexName){
+    global.nss.db.collection('reports').ensureIndex({'coordinates':'2dsphere'}, function(err, indexName){
       console.log('Connected to MongoDB');
       fn();
     });
