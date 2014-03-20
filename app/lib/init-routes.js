@@ -22,6 +22,7 @@ function load(app, fn){
   app.post('/register', d, residents.create);
   app.get('/login', d, residents.login);
   app.post('/login', d, residents.authenticate);
+
   app.get('/reports/new', d, reports.fresh);
   app.post('/reports', d, reports.create);
   app.get('/reports', d, reports.index);

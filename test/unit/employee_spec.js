@@ -2,7 +2,7 @@
 
 'use strict';
 
-process.env.DBNAME = 'airbnb-test';
+process.env.DBNAME = 'civic311-test';
 var expect = require('chai').expect;
 var Mongo = require('mongodb');
 var employee;

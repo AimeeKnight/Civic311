@@ -1,6 +1,6 @@
 'use strict';
 
-process.env.DBNAME = 'report-test';
+process.env.DBNAME = 'civic311-test';
 var expect = require('chai').expect;
 var fs = require('fs');
 var exec = require('child_process').exec;

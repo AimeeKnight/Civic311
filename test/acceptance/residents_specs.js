@@ -1,26 +1,26 @@
 'use strict';
 
-process.env.DBNAME = 'airbnb-test';
+process.env.DBNAME = 'civic311-test';
 var app = require('../../app/app');
 var request = require('supertest');
 var expect = require('chai').expect;
-var User;
+var Resident;
 var bob;
 
-describe('users', function(){
+describe('residents', function(){
 
   before(function(done){
     request(app)
     .get('/')
     .end(function(err, res){
-      User = require('../../app/models/user');
+      Resident = require('../../app/models/resident');
       done();
     });
   });
 
   beforeEach(function(done){
     global.nss.db.dropDatabase(function(err, result){
-      bob = new User({role:'host', email:'bob@nomail.com', password:'1234'});
+      bob = new Resident({role:'host', email:'bob@nomail.com', password:'1234'});
       bob.register(function(){
         done();
       });
@@ -40,7 +40,7 @@ describe('users', function(){
   });
 
   describe('POST /register', function(){
-    it('should register a new user', function(done){
+    it('should register a new resident', function(done){
       request(app)
       .post('/register')
       .field('email', 'sue@nomail.com')
@@ -52,7 +52,7 @@ describe('users', function(){
         done();
       });
     });
-    it('should not register a new user', function(done){
+    it('should not register a new resident', function(done){
       request(app)
       .post('/register')
       .field('email', 'bob@nomail.com')
@@ -79,7 +79,7 @@ describe('users', function(){
   });
 
   describe('POST /login', function(){
-    it('should login a new user', function(done){
+    it('should login a new resident', function(done){
       request(app)
       .post('/login')
       .field('email', 'bob@nomail.com')
@@ -91,7 +91,7 @@ describe('users', function(){
       });
     });
 
-    it('should not login a new user', function(done){
+    it('should not login a new resident', function(done){
       request(app)
       .post('/login')
       .field('email', 'wrong@nomail.com')
