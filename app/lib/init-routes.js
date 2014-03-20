@@ -36,6 +36,8 @@ function load(app, fn){
   app.post('/reports', d, reports.create);
   app.get('/reports', d, reports.index);
   app.get('/reports/query', d, reports.query);
+  app.get('/reports/:id', d, reports.show);
+  app.post('/reports/:id', d, reports.update);
   console.log('Routes Loaded');
   fn();
 }

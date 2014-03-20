@@ -6,6 +6,8 @@ var request = require('supertest');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var Report;
+var Resident;
+var residentId;
 
 describe('reports', function(){
 
@@ -14,6 +16,7 @@ describe('reports', function(){
     .get('/')
     .end(function(err, res){
       Report = require('../../app/models/report');
+      Resident = require('../../app/models/resident');
       done();
     });
   });
@@ -29,7 +32,11 @@ describe('reports', function(){
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy1file));
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy2file));
       global.nss.db.dropDatabase(function(err, result){
-        done();
+        var u1 = new Resident({email:'bob@nomail.com', name:'Person1', password:'1234'});
+        u1.register(function(){
+          residentId = u1._id.toString();
+          done();
+        });
       });
     });
   });
@@ -59,13 +66,11 @@ describe('reports', function(){
       });
     });
 
-    /*
     it('should display the report show page', function(done){
       request(app)
       .get('/reports/' + r1._id.toString())
       .expect(200, done);
     });
-  */
   });
 
   describe('GET /reports/new', function(){
@@ -77,32 +82,50 @@ describe('reports', function(){
   });
 
   describe('POST /reports', function(){
-    it('should create a new report and send user back to home', function(done){
+    it('should create a new report with a photo and send user back to home', function(done){
       var filename = __dirname + '/../fixtures/euro-copy1.jpg';
       request(app)
       .post('/reports')
       .attach('cover', filename)
       .field('name', 'Test Report1')
       .field('date', '2014-02-25')
+      .field('description', 'Report1 Description')
+      .field('address', '123 Main Street')
+      .field('coordinates', [30, 30])
+      .field('residentId', residentId)
       .expect(302, done);
     });
   });
 
-  /*
-  describe('POST /reports/3', function(){
-    var r1;
-
-    beforeEach(function(done){
-      r1 = new Report({name:'Test ReportA', taken:'2012-03-25', lat:'30', lng:'60'});
-      var oldname = __dirname + '/../fixtures/euro-copy1.jpg';
-      r1.addCover(oldname);
-      r1.insert(function(){
-        done();
-      });
+  describe('POST /reports', function(){
+    it('should create a new report without a photo and send user back to home', function(done){
+      request(app)
+      .post('/reports')
+      .field('name', 'Test Report1')
+      .field('date', '2014-02-25')
+      .field('description', 'Report1 Description')
+      .field('address', '123 Main Street')
+      .field('coordinates', [30, 30])
+      .field('residentId', residentId)
+      .expect(302, done);
     });
-  /////
   });
-  */
-/////  
+
+  describe('POST /reports/3', function(){
+    it('should edit a report and send user back to home', function(done){
+      //var filename = __dirname + '/../fixtures/euro-copy1.jpg';
+      request(app)
+      .post('/reports')
+      //.attach('cover', filename)
+      .field('name', 'Test Report1')
+      .field('date', '2014-02-25')
+      .field('description', 'Report1 Description')
+      .field('address', '456 Main Street')
+      .field('coordinates', [30, 30])
+      .field('residentId', residentId)
+      .expect(302, done);
+    });
+  });
+/////
 });
 
