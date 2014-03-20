@@ -11,16 +11,13 @@ var email = require('../lib/email');
  * _id
  * email
  * password
- * role
- *
- * #register
- * .findByEmailAndPassword
  * ---------------------------------- */
 
 function Employee(employee){
-  this.name = employee.name;
-  this.email = employee.email;
-  this.password = employee.password;
+  this.name = employee.name || '';
+  this.email = employee.email || '';
+  this.password = employee.password || '';
+  this.reports = employee.reports || [];
 }
 
 Employee.prototype.register = function(fn){

@@ -11,16 +11,13 @@ var email = require('../lib/email');
  * _id
  * email
  * password
- * role
- *
- * #register
- * .findByEmailAndPassword
  * ---------------------------------- */
 
 function Resident(resident){
   this.name = resident.name || '';
   this.email = resident.email || '';
   this.password = resident.password || '';
+  this.reports = resident.reports || [];
 }
 
 Resident.prototype.register = function(fn){

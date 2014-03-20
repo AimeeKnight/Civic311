@@ -119,8 +119,8 @@ describe('employees', function(){
       });
     });
 
-    describe('GET /employees:id', function(){
-      it('should login a user', function(done){
+    describe('GET /employees/:id', function(){
+      it('should show employee show page when logged in', function(done){
         request(app)
         .get('/employees/' + employeeId)
         .set('cookie', cookie)

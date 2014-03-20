@@ -2,18 +2,17 @@ extends ../shared/template
 
 block content
   .row
-    .small-4.columns
+    .small-12.columns
       form(method='post', action='/register')
         fieldset
           legend=title
+          label Name
+          input(type='text', name='name', required, autofocus=true)
           label Email
-          input(type='email', name='email', autofocus=true)
+          input(type='email', name='email', required)
           label Password
-          input(type='password', name='password')
-          label Role
-          select(name='role')
-            option Guest
-            option Host
-          button.radius.small Create
-    .small-8.columns
+          input(type='password', name='password', required)
+          label Employee Access Code
+          input(type='password', name='password', required)
+          button.radius.small Register
 
