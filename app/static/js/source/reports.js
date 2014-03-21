@@ -20,10 +20,7 @@
   }
 
   function clickSearch(){
-    var url = '/listings/query?lat=' + lat + '&lng=' + lng;
-    $.getJSON(url, function(data){
-      console.log(data);
-    });
+    window.location.href = ('/reports/query?lat=' + lat + '&lng=' + lng);
   }
 
   function findMyLocation(){
@@ -38,6 +35,7 @@
   function geoSuccess(location) {
     lat = location.coords.latitude;
     lng = location.coords.longitude;
+    // show search button when broswer sends location
     $('#search').show();
   }
 

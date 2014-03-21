@@ -4,8 +4,21 @@ block content
   h1= title
   #map
 
-  button#search(style='display:none;') Search by Location
+  button#search(style='display:none;') View Reports In Your Area
+
+  script.
+    var places = [];
+
+  ul#unsorted
+    each report in reports
+      li= report.name
+  
+        script.
+          var place = {};
+          place.address = '#{report.address}';
+          place.lat = #{report.coordinates[0]};
+          place.lng = #{report.coordinates[1]};
+          places.push(place);
 
 block scripts
-  script(src='/js/source/listings.js')
-
+  script(src='/js/source/reports.js')

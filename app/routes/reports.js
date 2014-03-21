@@ -44,7 +44,7 @@ exports.update = function(req, res){
 
 exports.query = function(req, res){
   Report.findByGeo(req.query, function(reports){
-    res.send({reports:reports});
+    console.log(reports);
+    res.render('reports/index', {reports:reports, title: 'Reports In Your Area'});
   });
 };
-

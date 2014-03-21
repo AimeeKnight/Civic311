@@ -3,17 +3,21 @@ extends ../shared/template
 block content
   h1= title
 
-  form(method='post', action='/listings')
+  form(action='/reports', method='post', enctype='multipart/form-data')
     label Name
-    input(type='text', name='name')
-    label Amount
-    input(type='text', name='amount')
+    input(type='text', name='name', required, autofocus='true')
     label Address
-    input(type='text', name='address')
+    input(type='text', name='address', required)
     input(type='hidden', name='lat')
     input(type='hidden', name='lng')
-    button#create Create Listing
+    label Description
+    input(type='text', name='description', required)
+    label Date
+    input(type='date', name='date', required)
+    label Picture
+    input(type='file', name='cover')
+    button#create Submit Report
 
 block scripts
-  script(src='/js/source/new-listing.js')
+  script(src='/js/source/new-report.js')
 
