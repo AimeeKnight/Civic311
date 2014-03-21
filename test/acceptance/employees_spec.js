@@ -58,7 +58,7 @@ describe('employees', function(){
     it('should register a new employee', function(done){
       request(app)
       .post('/admin/register')
-      .field('email', 'sue@nomail.com')
+      .field('email', 'sue@gmail.com')
       .field('password', '1234')
       .end(function(err, res){
         expect(res.status).to.equal(302);

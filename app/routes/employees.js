@@ -11,16 +11,20 @@ exports.token = function(req, res){
 };
 
 exports.create = function(req, res){
-  var employee = new Employee(req.body);
-  var token = Math.floor(Math.random() * 10000000);
-  employee.token = token;
-  employee.register(function(){
-    if(employee._id){
-      res.redirect('/admin/confirm');
-    }else{
-      res.render('employees/token', {title: 'Register Employee'});
-    }
-  });
+  if(req.body.email.match(/@gmail.com/g)){
+    var employee = new Employee(req.body);
+    var token = Math.floor(Math.random() * 10000000);
+    employee.token = token;
+    employee.register(function(){
+      if(employee._id){
+        res.redirect('/admin/confirm');
+      }else{
+        res.render('employees/token', {title: 'Register Employee'});
+      }
+    });
+  }else{
+    res.render('employees/token', {title: 'Register Employee'});
+  }
 };
 
 exports.confirmToken = function(req, res){
