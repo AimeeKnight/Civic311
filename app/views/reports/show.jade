@@ -3,3 +3,8 @@ extends ../shared/template
 block content
   h1= title
 
+  if report.photo
+    img(src= report.photo) 
+  h4= report.name  
+  h4= moment(report.date).format('MMMM Do, YYYY')
+  h4= report.description

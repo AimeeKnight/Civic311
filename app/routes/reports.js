@@ -10,7 +10,7 @@ exports.fresh = function(req, res){
 exports.create = function(req, res){
   var report = new Report(req.body);
 
-  if (req.files.cover){
+  if (req.files.cover && req.files.cover.size !== 0){
     report.addPhoto(req.files.cover.path);
     report.insert(function(){
       res.redirect('/');
