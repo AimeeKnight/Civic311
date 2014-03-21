@@ -48,7 +48,6 @@ describe('residents', function(){
       .post('/register')
       .field('email', 'sue@nomail.com')
       .field('password', '1234')
-      .field('role', 'guest')
       .end(function(err, res){
         expect(res.status).to.equal(302);
         expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
@@ -60,7 +59,6 @@ describe('residents', function(){
       .post('/register')
       .field('email', 'bob@nomail.com')
       .field('password', '1234')
-      .field('role', 'guest')
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('Register');

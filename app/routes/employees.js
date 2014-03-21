@@ -3,7 +3,7 @@
 var Employee = require('../models/employee');
 
 exports.fresh = function(req, res){
-  res.render('employees/fresh', {title: 'Register Employee'});
+  res.render('employees/fresh', {title: 'Employee Registration'});
 };
 
 exports.token = function(req, res){
@@ -19,11 +19,11 @@ exports.create = function(req, res){
       if(employee._id){
         res.redirect('/admin/confirm');
       }else{
-        res.render('employees/token', {title: 'Register Employee'});
+        res.render('employees/token', {title: 'Employee Registration'});
       }
     });
   }else{
-    res.render('employees/token', {title: 'Register Employee'});
+    res.render('employees/token', {title: 'Employee Registration'});
   }
 };
 
@@ -46,7 +46,7 @@ exports.confirmToken = function(req, res){
 };
 
 exports.login = function(req, res){
-  res.render('employees/login', {title: 'Login Employee'});
+  res.render('employees/login', {title: 'Employee Login'});
 };
 
 exports.authenticate = function(req, res){
@@ -59,7 +59,7 @@ exports.authenticate = function(req, res){
         });
       });
     }else{
-      res.render('employees/login', {title: 'Login Employee'});
+      res.render('employees/login', {title: 'Employee Login'});
     }
   });
 };

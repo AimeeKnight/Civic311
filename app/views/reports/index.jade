@@ -11,8 +11,9 @@ block content
 
   ul#unsorted
     each report in reports
-      li= report.name
-  
+      li
+        a(href='/reports/' + report._id)= report.name
+
         script.
           var place = {};
           place.address = '#{report.address}';
