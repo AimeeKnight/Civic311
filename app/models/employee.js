@@ -17,6 +17,7 @@ function Employee(employee){
   this.name = employee.name || '';
   this.email = employee.email || '';
   this.password = employee.password || '';
+  this.token = employee.token || '';
   this.reports = employee.reports || [];
 }
 
@@ -26,8 +27,9 @@ Employee.prototype.register = function(fn){
   hashPassword(self.password, function(hashedPwd){
     self.password = hashedPwd;
     insert(self, function(err){
+      var token = self.token;
       if(self._id){
-        email.sendWelcome({to:self.email}, function(err, body){
+        email.sendAccess({to:self.email, token:token}, function(err, body){
           fn(err, body);
         });
       }else{
@@ -60,6 +62,14 @@ Employee.findByEmailAndPassword = function(email, password, fn){
     }else{
       fn();
     }
+  });
+};
+
+Employee.deleteById = function(id, fn){
+  var _id = Mongo.ObjectID(id);
+
+  employees.remove({_id:_id}, function(err, count){
+    fn(count);
   });
 };
 

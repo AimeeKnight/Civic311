@@ -3,11 +3,40 @@
 var Employee = require('../models/employee');
 
 exports.fresh = function(req, res){
-  res.render('employees/fresh', {title: 'Register Employee'});
+  res.render('employees/fresh', {title: 'Employee Registration'});
 };
 
-exports.token = function(req, res){
-  res.render('employees/token', {title: 'Complete Your Registration'});
+exports.freshConfirm = function(req, res){
+  res.render('employees/confirm', {title: 'Complete Your Registration'});
+};
+
+/*
+exports.confirmToken = function(req, res){
+  var email = req.body.email;
+  if(email === 'aimeemarieknight@gmail.com'){
+    var num = Math.floor(Math.random() * 10000000);
+    res.send({num:num});
+  }else{
+    res.send('invalid email');
+  }
+};
+*/
+
+exports.confirmToken = function(req, res){
+  Employee.findByEmailAndPassword(req.body.email, req.body.password, function(employee){
+    if(employee.token.toString() === req.body.token.toString()){
+      req.session.regenerate(function(){
+        req.session.employeeId = employee._id;
+        req.session.save(function(){
+          res.redirect('/');
+        });
+      });
+    }else{
+      Employee.deleteById(employee._id.toString(), function(){
+        res.render('/');
+      });
+    }
+  });
 };
 
 exports.create = function(req, res){
@@ -16,33 +45,15 @@ exports.create = function(req, res){
   employee.token = token;
   employee.register(function(){
     if(employee._id){
-      res.redirect('/admin/confirm');
+      res.redirect('/');
     }else{
-      res.render('employees/token', {title: 'Register Employee'});
-    }
-  });
-};
-
-exports.confirmToken = function(req, res){
-  var token = req.body.token;
-  Employee.findByEmailAndPassword(req.body.email, req.body.password, function(employee){
-    if(employee.token.toString() === token){
-      req.session.regenerate(function(){
-        req.session.employeeId = employee._id;
-        req.session.save(function(){
-          res.redirect('/reports');
-        });
-      });
-    }else{
-      Employee.deleteById(employee._id.toString(), function(){
-        res.redirect('/');
-      });
+      res.render('employees/fresh', {title: 'Register Employee'});
     }
   });
 };
 
 exports.login = function(req, res){
-  res.render('employees/login', {title: 'Login Employee'});
+  res.render('employees/login', {title: 'Employee Login'});
 };
 
 exports.authenticate = function(req, res){
@@ -55,7 +66,7 @@ exports.authenticate = function(req, res){
         });
       });
     }else{
-      res.render('employees/login', {title: 'Login Employee'});
+      res.render('employees/login', {title: 'Employee Login'});
     }
   });
 };

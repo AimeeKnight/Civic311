@@ -42,16 +42,27 @@ describe('employees', function(){
     });
   });
 
+  describe('GET /admin/confirm', function(){
+    it('should display the confirmation page', function(done){
+      request(app)
+      .get('/admin/confirm')
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Register');
+        done();
+      });
+    });
+  });
+
   describe('POST /admin/register', function(){
     it('should register a new employee', function(done){
       request(app)
       .post('/admin/register')
       .field('email', 'sue@nomail.com')
       .field('password', '1234')
-      .field('role', 'guest')
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
+        expect(res.text).to.equal('Moved Temporarily. Redirecting to /admin/confirm');
         done();
       });
     });
@@ -60,7 +71,6 @@ describe('employees', function(){
       .post('/admin/register')
       .field('email', 'bob@nomail.com')
       .field('password', '1234')
-      .field('role', 'guest')
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('Register');

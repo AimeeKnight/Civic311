@@ -28,6 +28,7 @@ Resident.prototype.register = function(fn){
     insert(self, function(err){
       if(self._id){
         email.sendWelcome({to:self.email}, function(err, body){
+          console.log(body);
           fn(err, body);
         });
       }else{

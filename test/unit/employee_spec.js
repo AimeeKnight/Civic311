@@ -40,6 +40,7 @@ describe('employee', function(){
   describe('#register', function(){
     it('should register a new employee', function(done){
       var u1 = new Employee({name:'Person1', email:'employee1@example.com', password:'1234'});
+      //var u1 = new Employee({name:'Person2', email:'aimeemarieknight@gmail.com', password:'9876'});
       u1.register(function(err, body){
         expect(err).to.not.be.ok;
         expect(u1.password).to.have.length(60);
@@ -86,6 +87,19 @@ describe('employee', function(){
       Employee.findByEmailAndPassword('bob@nomail.com', 'wrong', function(employee){
         expect(employee).to.be.undefined;
         done();
+      });
+    });
+  });
+
+  describe('.deleteById', function(){
+    it('should delete employee by id', function(done){
+      var u1 = new Employee({name:'Person2', email:'bob2@nomail.com', password:'5678'});
+      u1.register(function(err, body){
+        var employeeId = u1._id.toString();
+        Employee.deleteById(employeeId , function(deletedCount){
+          expect(deletedCount).to.equal(1);
+          done();
+        });
       });
     });
   });

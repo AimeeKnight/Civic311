@@ -29,6 +29,8 @@ function load(app, fn){
   ////////// EMPLOYEES //////////
   app.get('/admin/register', d, employees.fresh);
   app.post('/admin/register', d, employees.create);
+  app.get('/admin/confirm', d, employees.token);
+  app.post('/admin/confirm', d, employees.confirmToken);
   app.get('/admin/login', d, employees.login);
   app.post('/admin/login', d, employees.authenticate);
   app.get('/employees/:id', d, employees.show);
