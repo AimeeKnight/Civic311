@@ -14,9 +14,9 @@ var email = require('../lib/email');
  * ---------------------------------- */
 
 function Resident(resident){
-  this.name = resident.name || '';
-  this.email = resident.email || '';
-  this.password = resident.password || '';
+  this.name = resident.name || null;
+  this.email = resident.email || null;
+  this.password = resident.password || null;
   this.reports = resident.reports || [];
 }
 

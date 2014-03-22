@@ -11,7 +11,7 @@
   var markers = [];
 
   function initialize(){
-    initMap(0, 0, 2);
+    initMap(36, -86, 3);
     for(var i = 0; i < places.length; i++){
       addMarker(places[i]);
     }

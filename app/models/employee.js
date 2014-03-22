@@ -14,10 +14,10 @@ var email = require('../lib/email');
  * ---------------------------------- */
 
 function Employee(employee){
-  this.name = employee.name || '';
-  this.email = employee.email || '';
-  this.password = employee.password || '';
-  this.token = employee.token || '';
+  this.name = employee.name || null;
+  this.email = employee.email || null;
+  this.password = employee.password || null;
+  this.token = employee.token || null;
   this.reports = employee.reports || [];
 }
 

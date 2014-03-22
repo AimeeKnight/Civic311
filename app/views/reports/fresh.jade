@@ -11,11 +11,16 @@ block content
     input(type='hidden', name='lat')
     input(type='hidden', name='lng')
     label Description
-    input(type='text', name='description', required)
+    textarea(name='description', required)
     label Date
     input(type='date', name='date', required)
+    br
+    label Confidential?
+    input(type="checkbox", name="visibility", checked=(true===false ? "checked" : undefined))
+    br
     label Picture
     input(type='file', name='cover')
+    br
     button#create Submit Report
 
 block scripts

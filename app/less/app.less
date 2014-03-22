@@ -1,11 +1,53 @@
 @bg-color: #fff;
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
 body{
-  background-color: @bg-color;
+  background-image: url('/img/satinweave.png');
+  font-family: 'Lato', sans-serif !important;
+}
+
+////////// FONTS //////////
+
+h1, h3,  h4, p, button, a{
+  font-family: 'Lato', sans-serif !important;
 }
 
 #map{
   width: 100%;
   height: 250px;
+}
+
+.top-bar{
+  background: #2980b9 !important;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button) {
+  background: #2980b9 !important;
+}
+
+.top-bar .name h1 a{
+  font-weight: 700;
+}
+
+.top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"]{
+  border-right: solid 1px #bdc3c7;
+}
+
+h1, h3 {
+  font-family: 'Varela Round', sans-serif !important;
+  font-size: 3.75rem;
+  color: #2980b9;
+  font-weight: 900;
+  text-align: center;
+  margin-top: 20px;
+}
+
+h3 {
+  font-size: 2.2rem;
+  color: #3b476b;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 5px;
 }
 

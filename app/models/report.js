@@ -11,6 +11,7 @@ var _ = require('lodash');
 function Report(report){
   this.name = report.name || null;
   this.date = new Date(report.date) || new Date();
+  // true === 'on' false === null
   this.visibility = report.visibility || null;
   this.employeeId = report.employeeId || null;
   this.residentId = report.residentId || null;
