@@ -71,7 +71,7 @@ exports.logout = function(req, res){
 };
 
 exports.show = function(req, res){
-  Employee.findById(req.session.userId, function(employee){
+  Employee.findById(req.params.id, function(employee){
     res.render('employees/show', {employee:employee});
   });
 };

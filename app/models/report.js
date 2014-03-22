@@ -13,12 +13,12 @@ function Report(report){
   this.date = new Date(report.date) || new Date();
   // true === 'on' false === null
   this.visibility = report.visibility || null;
+  this.currentStatus = report.currentStatus || 'Waiting on response';
   this.employeeId = report.employeeId || null;
   this.residentId = report.residentId || null;
   this.description = report.description || null;
   this.address = report.address || null;
   this.notifications = report.notifications || [];
-  this.address = report.address || null;
   this.coordinates = [report.lat * 1, report.lng * 1] || null;
   this.photo = this.photo || null;
 }
