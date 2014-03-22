@@ -64,6 +64,12 @@ exports.authenticate = function(req, res){
   });
 };
 
+exports.logout = function(req, res){
+  req.session.destroy(function(){
+    res.redirect('/');
+  });
+};
+
 exports.show = function(req, res){
   Employee.findById(req.session.userId, function(employee){
     res.render('employees/show', {employee:employee});

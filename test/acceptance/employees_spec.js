@@ -120,9 +120,9 @@ describe('employees', function(){
   describe('AUTHORIZED', function(){
     beforeEach(function(done){
       request(app)
-      .post('/login')
-      .field('email', 'testsue@nomail.com')
-      .field('password', 'abcd')
+      .post('/admin/login')
+      .field('email', 'bob@nomail.com')
+      .field('password', '1234')
       .end(function(err, res){
         cookie = res.headers['set-cookie'];
         done();
@@ -140,6 +140,19 @@ describe('employees', function(){
         });
       });
     });
+
+    describe('POST /logout', function(){
+      it('should logout employee when logged in', function(done){
+        request(app)
+        .post('/admin/logout')
+        .set('cookie', cookie)
+        .end(function(err, res){
+          expect(res.status).to.equal(302);
+          done();
+        });
+      });
+    });
+
   });
 
 });

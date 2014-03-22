@@ -109,9 +109,8 @@ describe('residents', function(){
     beforeEach(function(done){
       request(app)
       .post('/login')
-      .field('name', 'Sue')
-      .field('email', 'testsue@nomail.com')
-      .field('password', 'abcd')
+      .field('email', 'bob@nomail.com')
+      .field('password', '1234')
       .end(function(err, res){
         cookie = res.headers['set-cookie'];
         done();
@@ -129,6 +128,19 @@ describe('residents', function(){
         });
       });
     });
+
+    describe('POST /logout', function(){
+      it('should logout employee when logged in', function(done){
+        request(app)
+        .post('/logout')
+        .set('cookie', cookie)
+        .end(function(err, res){
+          expect(res.status).to.equal(302);
+          done();
+        });
+      });
+    });
+
   });
 
 });

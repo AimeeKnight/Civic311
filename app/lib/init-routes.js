@@ -24,6 +24,7 @@ function load(app, fn){
   app.post('/register', d, residents.create);
   app.get('/login', d, residents.login);
   app.post('/login', d, residents.authenticate);
+  app.post('/logout', d, residents.logout);
   app.get('/residents/:id', d, residents.show);
 
   ////////// EMPLOYEES //////////
@@ -33,6 +34,7 @@ function load(app, fn){
   app.post('/admin/confirm', d, employees.confirmToken);
   app.get('/admin/login', d, employees.login);
   app.post('/admin/login', d, employees.authenticate);
+  app.post('/admin/logout', d, employees.logout);
   app.get('/employees/:id', d, employees.show);
 
   ////////// REPORTS //////////

@@ -22,6 +22,12 @@ exports.login = function(req, res){
   res.render('residents/login', {title: 'Resident Login'});
 };
 
+exports.logout = function(req, res){
+  req.session.destroy(function(){
+    res.redirect('/');
+  });
+};
+
 exports.authenticate = function(req, res){
   Resident.findByEmailAndPassword(req.body.email, req.body.password, function(resident){
     if(resident){

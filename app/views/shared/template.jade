@@ -30,6 +30,17 @@ html(class='no-js', lang='en')
           li: a(href="/register") Register
           li.divider
           li: a(href="/login") Login
+          if currentResident
+            li.divider
+            li.has-form
+              form(action='/logout'  method='POST' )
+                button.tiny.radius.space Logout
+          if currentEmployee
+            li.divider
+            li.has-form
+              form(action='/admin/logout'  method='POST' )
+                button.tiny.radius.space Logout
+
     .row
       .small-12.columns
         block content
