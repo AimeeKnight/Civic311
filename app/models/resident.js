@@ -5,6 +5,7 @@ var Mongo = require('mongodb');
 var bcrypt = require('bcrypt');
 var residents = global.nss.db.collection('residents');
 var email = require('../lib/email');
+var _ = require('lodash');
 
 /* ---------------------------------- *
  * Resident
@@ -17,8 +18,22 @@ function Resident(resident){
   this.name = resident.name || null;
   this.email = resident.email || null;
   this.password = resident.password || null;
+  this.facebookId = resident.facebookId || null;
   this.reports = resident.reports || [];
 }
+
+Resident.prototype.fbInsert = function(fn){
+  var self = this;
+  residents.findOne({facebookId:this.facebookId}, function(err, record){
+    if(!record){
+      residents.insert(self, function(err, residents){
+        fn(residents[0]);
+      });
+    }else{
+      fn(err);
+    }
+  });
+};
 
 Resident.prototype.register = function(fn){
   var self = this;
@@ -28,7 +43,6 @@ Resident.prototype.register = function(fn){
     insert(self, function(err){
       if(self._id){
         email.sendWelcome({to:self.email}, function(err, body){
-          console.log(body);
           fn(err, body);
         });
       }else{
@@ -59,6 +73,12 @@ Resident.findByEmailAndPassword = function(email, password, fn){
     }else{
       fn();
     }
+  });
+};
+
+Resident.findByFacebookId = function(fbId, fn){
+  residents.findOne({facebookId:fbId}, function(err, resident){
+    fn(_.extend(resident, Resident.prototype));
   });
 };
 

@@ -1,7 +1,8 @@
 'use strict';
-
 var d = require('../lib/request-debug');
+var passport = require('passport');
 var initialized = false;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 module.exports = function(req, res, next){
   if(!initialized){
@@ -13,10 +14,54 @@ module.exports = function(req, res, next){
 };
 
 function load(app, fn){
+  var Resident = require('../models/resident');
+  
+  passport.serializeUser(function(user, done){
+    done(null, user);
+  });
+
+  passport.deserializeUser(function(obj, done){
+    done(null, obj);
+  });
+
+  passport.use(new FacebookStrategy({
+      clientID: '1430897753818675',
+      clientSecret: 'a1a805afc58ab0421b780187acd29a66',
+      callbackURL: 'http://192.168.11.193:4009/auth/facebook/callback'
+    },
+
+    function(accessToken, refreshToken, profile, done){
+
+      process.nextTick(function() {
+
+        Resident.findByFacebookId(profile.id.toString(), function(user){
+          if(user){
+            return done(null, user);
+          }else{
+            var newUser = new Resident({});
+            newUser.facebookId = profile.id;
+            newUser.name = profile.displayName;
+            newUser.insert(function(user){
+              return done(null, user);
+            });
+          }
+        });
+      });
+    }
+  ));
+
   var home = require('../routes/home');
   var residents = require('../routes/residents');
   var employees = require('../routes/employees');
   var reports = require('../routes/reports');
+
+  ////////// FACEBOOK //////////
+  app.get('/auth/facebook', passport.authenticate('facebook'));
+  app.get('/auth/facebook/callback', d,
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/listings');
+  });
 
   ////////// RESIDENTS //////////
   app.get('/', d, home.index);

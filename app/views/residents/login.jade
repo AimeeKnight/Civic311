@@ -2,8 +2,8 @@ extends ../shared/template
 
 block content
   .row
-    .small-4.columns
-      form(method='post', action='/login')
+    .small-12.columns
+      form#forms(method='post', action='/login')
         fieldset
           legend=title
           label Email
@@ -11,5 +11,4 @@ block content
           label Password
           input(type='password', name='password')
           button.radius.small Login
-    .small-8.columns
 

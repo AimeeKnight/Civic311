@@ -37,6 +37,16 @@ describe('resident', function(){
     });
   });
 
+  describe('#fbInsert', function(){
+    it('should insert new resident into the database', function(done){
+      var fbu = new Resident({name:'Person3', facebookId:'1234', email:'sue@nomail.com', password:'5678'});
+      fbu.fbInsert(function(resident){
+        expect(resident._id).to.be.instanceof(Mongo.ObjectID);
+        done();
+      });
+    });
+  });
+
   describe('#register', function(){
     it('should register a new resident', function(done){
       var u1 = new Resident({name:'Person1', email:'resident1@example.com', password:'1234'});
@@ -87,6 +97,18 @@ describe('resident', function(){
       Resident.findByEmailAndPassword('bob@nomail.com', 'wrong', function(resident){
         expect(resident).to.be.undefined;
         done();
+      });
+    });
+  });
+
+  describe('.findByFacebookId', function(){
+    it('should find a user by fb ID', function(done){
+      var fbu = new Resident({name:'Person3', facebookId:'1234', email:'sue@nomail.com', password:'5678'});
+      fbu.fbInsert(function(){
+        Resident.findByFacebookId(fbu.facebookId, function(resident){
+          expect(resident.facebookId).to.equal('1234');
+          done();
+        });
       });
     });
   });

@@ -10,7 +10,7 @@ module.exports = function(req, res, next){
   if(_.contains(urls, path)){
     next();
   }else{
-    if(req.session.residentId || req.session.employeeId || req.session.userId){
+    if(req.session.residentId || req.session.employeeId || req.session.userId || req.isAuthenticated()){
       next();
     }else{
       res.redirect('/');

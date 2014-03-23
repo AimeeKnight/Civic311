@@ -77,7 +77,6 @@ Report.findByGeo = function(query, fn){
   var lng = query.lng * 1;
   var data = {'coordinates':{$nearSphere:{$geometry:{type:'Point', coordinates:[lat, lng]}}, $maxDistance : 25000000}};
   reports.find(data).toArray(function(err, reports){
-    console.log('KKKKKKKKKKKKKKKKKKK', reports);
     fn(reports);
   });
 };
