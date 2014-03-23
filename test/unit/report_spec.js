@@ -139,6 +139,16 @@ describe('Report', function(){
         });
       });
     });
+
+    describe('.findPublic', function(){
+      it('should find all public reports in the  database', function(done){
+        Report.findPublic(function(reports){
+          expect(reports[0]._id).to.deep.equal(r1._id);
+          expect(reports).to.have.length(3);
+          done();
+        });
+      });
+    });
   });
 
   describe('.findByGeo', function(){

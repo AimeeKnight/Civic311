@@ -62,15 +62,12 @@ Report.findById = function(id, fn){
   });
 };
 
-/*
-Report.findByResidentId = function(id, fn){
-  var _id = Mongo.ObjectID(id);
+Report.findPublic = function(fn){
 
-  reports.find({residentId:_id}).toArray(function(err, reports){
+  reports.find({visibility:null}).toArray(function(err, reports){
     fn(reports);
   });
 };
-*/
 
 Report.findByGeo = function(query, fn){
   var lat = query.lat * 1;
