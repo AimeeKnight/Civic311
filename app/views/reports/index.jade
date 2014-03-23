@@ -4,7 +4,8 @@ block content
   h1= title
   #map
 
-  button.small.radius#search(style='display:none;') View Reports In Your Area
+  if currentResident && reports.length > 0
+    button.small.radius#search(style='display:none;') View Reports In Your Area
 
   script.
     var places = [];
@@ -20,6 +21,9 @@ block content
           place.lat = #{report.coordinates[0]};
           place.lng = #{report.coordinates[1]};
           places.push(place);
+
+  if currentEmployee
+    a(href='/reports/admin').button.alert.small.radius Include Private Reports
 
 block scripts
   script(src='/js/source/reports.js')

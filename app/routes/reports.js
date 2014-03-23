@@ -5,6 +5,7 @@ var Resident = require('../models/resident');
 var moment = require('moment');
 var Mongo = require('mongodb');
 var email = require('../lib/email');
+var _ = require('lodash');
 
 exports.fresh = function(req, res){
   res.render('reports/fresh', {title: 'New Report'});
@@ -35,6 +36,12 @@ exports.create = function(req, res, fn){
 };
 
 exports.index = function(req, res){
+  Report.findPublic(function(reports){
+    res.render('reports/index', {reports:reports, title: 'Reports'});
+  });
+};
+
+exports.adminIndex = function(req, res){
   Report.findAll(function(reports){
     res.render('reports/index', {reports:reports, title: 'Reports'});
   });
@@ -73,8 +80,8 @@ exports.subscribe = function(req, res){
 
 exports.geoQuery = function(req, res){
   Report.findByGeo(req.query, function(reports){
-    console.log(reports);
-    res.render('reports/index', {reports:reports, title: 'Reports In Your Area'});
+    var publicReports = _.remove(reports, function(report){ return report.visibility === 'public'; });
+    res.render('reports/index', {reports:publicReports, title: 'Reports In Your Area'});
   });
 };
 

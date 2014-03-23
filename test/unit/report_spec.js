@@ -107,9 +107,9 @@ describe('Report', function(){
     var r1, r2, r3;
 
     beforeEach(function(done){
-      r1 = new Report({name:'Test ReportA', taken:'2012-03-25', lat:'30', lng:'60'});
-      r2 = new Report({name:'Test ReportB', taken:'2012-03-26', lat:'40', lng:'70'});
-      r3 = new Report({name:'Test ReportC', taken:'2012-03-27', lat:'50', lng:'80'});
+      r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60'});
+      r2 = new Report({name:'Test ReportB', date:'2012-03-26', lat:'40', lng:'70'});
+      r3 = new Report({name:'Test ReportC', date:'2012-03-27', lat:'50', lng:'80'});
 
       r1.insert(function(){
         r2.insert(function(){
@@ -152,14 +152,16 @@ describe('Report', function(){
   });
 
   describe('.findByGeo', function(){
-    it('should find closest closet by location', function(done){
+    it('should find public records by location', function(done){
       var r2 = new Report({name:'Test Report2',
-                         taken: '2012-03-25',
+                         visibility: 'public',
+                         date: '2012-03-25',
                          lat: '30',
                          lng: '30',
                          address: '123 Main Street'});
       var r3 = new Report({name:'Test Report3',
-                         taken: '2012-03-26',
+                         visibility: 'public',
+                         date: '2012-03-26',
                          lat: '40',
                          lng: '40',
                          address: '456 Main Street'});

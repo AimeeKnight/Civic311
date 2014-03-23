@@ -12,7 +12,11 @@ function Report(report){
   this.name = report.name || null;
   this.date = new Date(report.date) || new Date();
   // true === 'on' false === null
-  this.visibility = report.visibility || null;
+  if (report.visibility === 'on'){
+    this.visibility = 'private';
+  }else{
+    this.visibility = 'public';
+  }
   this.currentStatus = report.currentStatus || 'Waiting on response';
   this.employeeId = report.employeeId || null;
   this.residentId = report.residentId || null;
@@ -63,8 +67,7 @@ Report.findById = function(id, fn){
 };
 
 Report.findPublic = function(fn){
-
-  reports.find({visibility:null}).toArray(function(err, reports){
+  reports.find({visibility:'public'}).toArray(function(err, reports){
     fn(reports);
   });
 };
@@ -72,8 +75,9 @@ Report.findPublic = function(fn){
 Report.findByGeo = function(query, fn){
   var lat = query.lat * 1;
   var lng = query.lng * 1;
-
-  reports.find({'coordinates':{$nearSphere:{$geometry:{type:'Point', coordinates:[lat, lng]}}, $maxDistance : 2500000}}).toArray(function(err, reports){
+  var data = {'coordinates':{$nearSphere:{$geometry:{type:'Point', coordinates:[lat, lng]}}, $maxDistance : 25000000}};
+  reports.find(data).toArray(function(err, reports){
+    console.log('KKKKKKKKKKKKKKKKKKK', reports);
     fn(reports);
   });
 };

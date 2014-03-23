@@ -58,7 +58,6 @@ describe('reports', function(){
     });
   });
 
-
   describe('AUTHORIZED', function(){
     beforeEach(function(done){
       request(app)
@@ -87,6 +86,20 @@ describe('reports', function(){
             });
           });
         });
+      });
+
+      it('should display the reports default index page', function(done){
+        request(app)
+        .get('/reports')
+        .set('cookie', cookie)
+        .expect(200, done);
+      });
+
+      it('should display the reports index page for admins', function(done){
+        request(app)
+        .get('/reports/admin')
+        .set('cookie', cookie)
+        .expect(200, done);
       });
 
       it('should display the report show page', function(done){

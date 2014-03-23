@@ -41,6 +41,7 @@ function load(app, fn){
   app.get('/reports/new', d, reports.fresh);
   app.post('/reports', d, reports.create);
   app.get('/reports', d, reports.index);
+  app.get('/reports/admin', d, reports.adminIndex);
   app.get('/reports/query', d, reports.geoQuery);
   app.get('/reports/:id', d, reports.show);
   app.post('/reports/:id', d, reports.update);
