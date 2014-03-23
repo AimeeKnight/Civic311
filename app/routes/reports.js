@@ -1,8 +1,10 @@
 'use strict';
 
 var Report = require('../models/report');
+var Resident = require('../models/resident');
 var moment = require('moment');
 var Mongo = require('mongodb');
+var email = require('../lib/email');
 
 exports.fresh = function(req, res){
   res.render('reports/fresh', {title: 'New Report'});
@@ -36,17 +38,36 @@ exports.show = function(req, res){
   });
 };
 
-exports.update = function(req, res){
+/*
+exports.indexByResident = function(req, res){
+  Report.findByResidentEmail(req.params.residentEmail, function(reports){
+    res.render('reports/index', {reports:reports, title: 'Reports'});
+  });
+};
+*/
+
+exports.update = function(req, res, fn){
+  console.log('!!!!!!!!!!!!', req.params.id);
+  Report.findById(req.params.id.toString(), function(report){
+    report.employeeId = new Mongo.ObjectID(req.body.employeeId);
+    report.currentStatus = req.body.currentStatus;
+
+    Resident.findById(report.residentId.toString(), function(resident){
+      console.log('!!!!!!!!!!!!', report);
+      console.log('!!!!!!!!!!!!', resident);
+      email.sendUpdate({to:resident.email, name:resident.name, currentStatus:report.currentStatus}, function(err, body){
+        report.update(function(){
+          fn(err, body);
+          res.redirect('/reports/' + req.params.id);
+        });
+      });
+    });
+  });
+};
+
+exports.subscribe = function(req, res){
   Report.findById(req.params.id, function(report){
-    if (req.body.employeeId) {
-      report.employeeId = new Mongo.ObjectID(req.body.employeeId);
-    }
-    if (req.body.currentStatus){
-      report.currentStatus = req.body.currentStatus;
-    }
-    if (req.body.currentResident){
-      report.notifications.push(new Mongo.ObjectID(req.body.currentResident));
-    }
+    report.notifications.push(new Mongo.ObjectID(req.body.currentResident));
     report.update(function(){
       res.redirect('/reports/' + req.params.id);
     });
@@ -59,3 +80,4 @@ exports.query = function(req, res){
     res.render('reports/index', {reports:reports, title: 'Reports In Your Area'});
   });
 };
+

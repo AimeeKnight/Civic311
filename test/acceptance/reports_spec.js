@@ -7,7 +7,10 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 var Report;
 var Resident;
+var Employee;
 var residentId;
+var employeeId;
+var reportId;
 var cookie;
 
 describe('reports', function(){
@@ -18,6 +21,7 @@ describe('reports', function(){
     .end(function(err, res){
       Report = require('../../app/models/report');
       Resident = require('../../app/models/resident');
+      Employee = require('../../app/models/employee');
       done();
     });
   });
@@ -34,9 +38,13 @@ describe('reports', function(){
       fs.createReadStream(origfile).pipe(fs.createWriteStream(copy2file));
       global.nss.db.dropDatabase(function(err, result){
         var u1 = new Resident({email:'bob@nomail.com', name:'Person1', password:'1234'});
+        var u2 = new Employee({email:'sue@nomail.com', name:'Person1', password:'5678'});
         u1.register(function(){
-          residentId = u1._id.toString();
-          done();
+          u2.register(function(){
+            residentId = u1._id.toString();
+            employeeId = u2._id.toString();
+            done();
+          });
         });
       });
     });
@@ -67,11 +75,12 @@ describe('reports', function(){
       var r1, r2, r3;
 
       beforeEach(function(done){
-        r1 = new Report({name:'Test ReportA', taken:'2012-03-25', lat:'30', lng:'60'});
-        r2 = new Report({name:'Test ReportB', taken:'2012-03-26', lat:'40', lng:'70'});
-        r3 = new Report({name:'Test ReportC', taken:'2012-03-27', lat:'50', lng:'80'});
+        r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', residentId:residentId});
+        r2 = new Report({name:'Test ReportB', date:'2012-03-26', lat:'40', lng:'70', residentId:residentId});
+        r3 = new Report({name:'Test ReportC', date:'2012-03-27', lat:'50', lng:'80', residentId:residentId});
 
         r1.insert(function(){
+          reportId = r1._id.toString();
           r2.insert(function(){
             r3.insert(function(){
               done();
@@ -82,7 +91,7 @@ describe('reports', function(){
 
       it('should display the report show page', function(done){
         request(app)
-        .get('/reports/' + r1._id.toString())
+        .get('/reports/' + reportId)
         .set('cookie', cookie)
         .expect(200, done);
       });
@@ -120,27 +129,39 @@ describe('reports', function(){
         .post('/reports')
         .set('cookie', cookie)
         .field('name', 'Test Report1')
+        .field('residentId', residentId)
         .field('date', '2014-02-25')
         .field('description', 'Report1 Description')
         .field('address', '123 Main Street')
         .field('coordinates', [30, 30])
-        .field('residentId', residentId)
         .expect(302, done);
       });
     });
 
     describe('POST /reports/3', function(){
       it('should edit a report and send user back to home', function(done){
-        request(app)
-        .post('/reports')
-        .set('cookie', cookie)
-        .field('name', 'Test Report1')
-        .field('date', '2014-02-25')
-        .field('description', 'Report1 Description')
-        .field('address', '456 Main Street')
-        .field('coordinates', [30, 30])
-        .field('residentId', residentId)
-        .expect(302, done);
+        var r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', residentId:residentId});
+        r1.insert(function(){
+          request(app)
+          .post('/reports/' + r1._id.toString())
+          .set('cookie', cookie)
+          .field('employeeId', employeeId)
+          .field('currentStatus', 'status update')
+          .expect(302, done);
+        });
+      });
+    });
+
+    describe('POST /reports/subscribe/3', function(){
+      it('should edit a report and send user back to home', function(done){
+        var r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', residentId:residentId});
+        r1.insert(function(){
+          request(app)
+          .post('/reports/subscribe/' + r1._id.toString())
+          .set('cookie', cookie)
+          .field('currentResident', residentId)
+          .expect(302, done);
+        });
       });
     });
 

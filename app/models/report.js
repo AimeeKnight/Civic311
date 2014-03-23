@@ -62,6 +62,16 @@ Report.findById = function(id, fn){
   });
 };
 
+/*
+Report.findByResidentId = function(id, fn){
+  var _id = Mongo.ObjectID(id);
+
+  reports.find({residentId:_id}).toArray(function(err, reports){
+    fn(reports);
+  });
+};
+*/
+
 Report.findByGeo = function(query, fn){
   var lat = query.lat * 1;
   var lng = query.lng * 1;
