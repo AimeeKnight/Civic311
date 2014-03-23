@@ -10,18 +10,26 @@ exports.fresh = function(req, res){
   res.render('reports/fresh', {title: 'New Report'});
 };
 
-exports.create = function(req, res){
+exports.create = function(req, res, fn){
+  var currentResident = res.locals.currentResident;
   req.body.residentId = new Mongo.ObjectID(req.session.residentId);
   var report = new Report(req.body);
 
   if (req.files.cover && req.files.cover.size !== 0){
     report.addPhoto(req.files.cover.path);
     report.insert(function(){
-      res.redirect('/');
+
+      email.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
+        fn(err, body);
+        res.redirect('/');
+      });
     });
   }else{
     report.insert(function(){
-      res.redirect('/');
+      email.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
+        fn(err, body);
+        res.redirect('/');
+      });
     });
   }
 };
@@ -38,23 +46,12 @@ exports.show = function(req, res){
   });
 };
 
-/*
-exports.indexByResident = function(req, res){
-  Report.findByResidentEmail(req.params.residentEmail, function(reports){
-    res.render('reports/index', {reports:reports, title: 'Reports'});
-  });
-};
-*/
-
 exports.update = function(req, res, fn){
-  console.log('!!!!!!!!!!!!', req.params.id);
   Report.findById(req.params.id.toString(), function(report){
     report.employeeId = new Mongo.ObjectID(req.body.employeeId);
     report.currentStatus = req.body.currentStatus;
 
     Resident.findById(report.residentId.toString(), function(resident){
-      console.log('!!!!!!!!!!!!', report);
-      console.log('!!!!!!!!!!!!', resident);
       email.sendUpdate({to:resident.email, name:resident.name, currentStatus:report.currentStatus}, function(err, body){
         report.update(function(){
           fn(err, body);
@@ -74,7 +71,7 @@ exports.subscribe = function(req, res){
   });
 };
 
-exports.query = function(req, res){
+exports.geoQuery = function(req, res){
   Report.findByGeo(req.query, function(reports){
     console.log(reports);
     res.render('reports/index', {reports:reports, title: 'Reports In Your Area'});
