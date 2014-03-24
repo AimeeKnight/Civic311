@@ -55,9 +55,9 @@ describe('resident', function(){
         expect(err).to.be.null;
         expect(u1.password).to.have.length(60);
         expect(u1._id).to.be.instanceof(Mongo.ObjectID);
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', body);
         body = JSON.parse(body);
-        console.log(body);
-        //expect(body.id).to.be.ok;
+        expect(body.id).to.be.ok;
         done();
       });
     });
