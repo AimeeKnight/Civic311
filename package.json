@@ -1,8 +1,8 @@
 {
-  "name": "airbnb-js",
+  "name": "Civic311",
   "repository" : {
     "type" : "git",
-    "url"  : "http://github.com/chyld/airbnb-js.git"
+    "url"  : "http://github.com/AimeeKnight/Civic311.git"
   },
   "version": "0.0.1",
   "bin": {"coveralls" : "./node_modules/coveralls/bin/coveralls.js"},
