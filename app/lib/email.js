@@ -96,7 +96,7 @@ function compileJade(data){
 
 ////////// ID //////////
 exports.sendId = function(data, fn){
-  send({from:'admin@aimeemarieknight.us', to:data.to, name:data.name, id:data.reportId, subject:'Civic 311 Report ID', template:'id'}, fn);
+  send({from:'admin@aimeemarieknight.us', to:data.to, subject:'Civic 311 Report ID', template:'id'}, fn);
 };
 
 function send(data, fn){
