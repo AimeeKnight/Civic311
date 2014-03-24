@@ -53,15 +53,16 @@ exports.show = function(req, res){
   });
 };
 
-exports.update = function(req, res, fn){
+exports.update = function(req, res){
   Report.findById(req.params.id.toString(), function(report){
     report.employeeId = new Mongo.ObjectID(req.body.employeeId);
     report.currentStatus = req.body.currentStatus;
 
     Resident.findById(report.residentId.toString(), function(resident){
-      email.sendUpdate({to:resident.email, name:resident.name, currentStatus:report.currentStatus}, function(err, body){
+      var emailList = resident.email + ', '  + report.notifications.join(', ');
+      console.log(emailList);
+      email.sendUpdate({to:emailList, name:resident.name, currentStatus:report.currentStatus}, function(err, body){
         report.update(function(){
-          fn(err, body);
           res.redirect('/reports/' + req.params.id);
         });
       });
@@ -71,9 +72,11 @@ exports.update = function(req, res, fn){
 
 exports.subscribe = function(req, res){
   Report.findById(req.params.id, function(report){
-    report.notifications.push(new Mongo.ObjectID(req.body.currentResident));
-    report.update(function(){
-      res.redirect('/reports/' + req.params.id);
+    Resident.findById(req.body.currentResident, function(resident){
+      report.notifications.push(resident.email);
+      report.update(function(){
+        res.redirect('/reports/' + req.params.id);
+      });
     });
   });
 };
@@ -84,4 +87,3 @@ exports.geoQuery = function(req, res){
     res.render('reports/index', {reports:publicReports, title: 'Reports In Your Area'});
   });
 };
-
