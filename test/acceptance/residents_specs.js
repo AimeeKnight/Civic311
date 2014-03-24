@@ -129,6 +129,19 @@ describe('residents', function(){
       });
     });
 
+    describe('GET /update', function(){
+      it('should redirect to home page when a fb user logs in with an email', function(done){
+        request(app)
+        .get('/update')
+        .set('cookie', cookie)
+        .end(function(err, res){
+          expect(res.status).to.equal(302);
+          done();
+        });
+      });
+    });
+
+
     describe('POST /logout', function(){
       it('should logout employee when logged in', function(done){
         request(app)

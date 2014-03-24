@@ -81,7 +81,7 @@ describe('Report', function(){
   });
 
   describe('#update', function(){
-    it('should update an existing photo report', function(done){
+    it('should update an existing report', function(done){
       var o = {};
       o.name = 'Test Report1';
       o.date = '2010-03-25';

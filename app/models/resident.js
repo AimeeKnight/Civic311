@@ -35,6 +35,12 @@ Resident.prototype.fbInsert = function(fn){
   });
 };
 
+Resident.prototype.update = function(fn){
+  residents.update({_id:this._id}, this, function(err, count){
+    fn(err, count);
+  });
+};
+
 Resident.prototype.register = function(fn){
   var self = this;
 
@@ -55,8 +61,8 @@ Resident.prototype.register = function(fn){
 Resident.findById = function(id, fn){
   var _id = Mongo.ObjectID(id);
 
-  residents.findOne({_id:_id}, function(err, record){
-    fn(record);
+  residents.findOne({_id:_id}, function(err, resident){
+    fn(_.extend(resident, Resident.prototype));
   });
 };
 

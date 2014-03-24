@@ -7,6 +7,24 @@ exports.fresh = function(req, res){
   res.render('residents/fresh', {title: 'Resident Registration'});
 };
 
+exports.fbInfo = function(req, res){
+  if (req.user && !req.user.email){
+    res.render('residents/update', {title: 'Please submit your email to receive notifications', fbResident:req.user});
+  }else{
+    res.redirect('/');
+  }
+};
+
+exports.fbUpdate = function(req, res){
+  Resident.findById(req.params.id.toString(), function(resident){
+    resident.email = req.body.email;
+
+    resident.update(function(){
+      res.redirect('/');
+    });
+  });
+};
+
 exports.create = function(req, res){
   var resident = new Resident(req.body);
   resident.register(function(){

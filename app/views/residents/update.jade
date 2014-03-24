@@ -1,0 +1,12 @@
+extends ../shared/template
+
+block content
+  .row
+    .small-12.columns
+      form#forms(method='post', action='/residents/' + fbResident._id)
+        fieldset
+          legend=title
+          label Email
+          input(type='email', name='email', required)
+          button.radius.small Register
+

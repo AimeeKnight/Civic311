@@ -113,5 +113,22 @@ describe('resident', function(){
     });
   });
 
+  describe('#update', function(){
+    it('should update an existing resident', function(done){
+      var fbu = new Resident({name:'fbPerson', facebookId:'5678', email:'fb@nomail.com'});
+      fbu.fbInsert(function(){
+        var residentId = fbu._id.toString();
+        Resident.findById(residentId, function(resident){
+          resident.email = 'suefb@nomail.com';
+          resident.update(function(err, count){
+            expect(count).to.equal(1);
+            expect(resident.email).to.equal('suefb@nomail.com');
+            done();
+          });
+        });
+      });
+    });
+  });
+
 });
 
