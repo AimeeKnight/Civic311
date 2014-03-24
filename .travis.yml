@@ -8,5 +8,6 @@ after_script:
   - npm run coveralls
 env:
   global:
-    secure: "IaVYMgXaYkSfPEkuuxQyaSV4jvgFvWy6UiybkFJfFfKY/fk+lxPUv+uIngshYFonEIzcM0EHDI8FfF4A0UVJ0cWFt5wuZcMoO0q6XEpohQL++3+MgyQV9qd56mZi9y3iWOPz51wsed9D8AkndoQfTGsJT/0L/0qxYQJaJrdrtSs="
+    secure: "ly30C5a2+Bbm9U281hbMN6iYxpSdF2qJbisBLdChC4vdi0QCe8El3C0lYSkCmvNChRcEQ6xxGjMNlwEUf0t3CTv0oyejcVAaZnGa+LUgSwczL5JT4Dukr21ssLzta6Dkt0tkrezCvNaPtZpNcvA+UUfWgdC9T9BdWYmoOZ6qD7g="
+    secure: "bsboBB+0q23S1wyZ1ElCRAfYtJ/Y5C9V1E9wXCmz8a/cGI9Txv3oyx6XBryixSoDumpq5kSBN2++IAkUPVLfjCRW/1o3me+z083GC+MXq4aW1phnaPGBtcDTCq7MAKgA6sN9HOoy3kiOFiFVqy+Z60/cX4yJd6KObx8WeENB+rc="
 
