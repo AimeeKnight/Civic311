@@ -3,6 +3,7 @@ var d = require('../lib/request-debug');
 var passport = require('passport');
 var initialized = false;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var key = process.env.MAILGUN;
 
 module.exports = function(req, res, next){
   if(!initialized){
@@ -26,7 +27,7 @@ function load(app, fn){
 
   passport.use(new FacebookStrategy({
       clientID: '505396282898918',
-      clientSecret: FBCLIENTSECRET,
+      clientSecret: key,
       callbackURL: 'http://192.168.1.14:4009/auth/facebook/callback'
     },
 
