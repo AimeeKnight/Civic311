@@ -20,14 +20,14 @@ exports.create = function(req, res, fn){
     report.addPhoto(req.files.cover.path);
     report.insert(function(){
 
-      email.sendId({to:currentResident.email}, function(err, body){
+      email.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
         fn(err, body);
         res.redirect('/');
       });
     });
   }else{
     report.insert(function(){
-      email.sendId({to:currentResident.email}, function(err, body){
+      email.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
         fn(err, body);
         res.redirect('/');
       });
