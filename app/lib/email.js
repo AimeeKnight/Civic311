@@ -108,6 +108,9 @@ function send(data, fn){
     console.log('AAAAAAAAAAAAAAAAAA', body);
     console.log('AAAAAAAAAAAAAAAAAA', err);
     console.log('AAAAAAAAAAAAAAAAAA', data.to);
+    console.log('AAAAAAAAAAAAAAAAAA', data.from);
+    console.log('AAAAAAAAAAAAAAAAAA', data.subject);
+    console.log('AAAAAAAAAAAAAAAAAA', data.response);
     fn(err, body);
   });
 
