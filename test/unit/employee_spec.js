@@ -46,6 +46,7 @@ describe('employee', function(){
         expect(u1.password).to.have.length(60);
         expect(u1._id).to.be.instanceof(Mongo.ObjectID);
         body = JSON.parse(body);
+        console.log(body);
         //expect(body.id).to.be.ok;
         done();
       });
