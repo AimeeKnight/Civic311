@@ -49,8 +49,8 @@ describe('resident', function(){
 
   describe('#register', function(){
     it('should register a new resident', function(done){
-      var u1 = new Resident({name:'Person1', email:'resident1@example.com', password:'1234'});
-      //var u1 = new Resident({name:'Aimee', email:'aimeemarieknight@gmail.com', password:'9876'});
+      //var u1 = new Resident({name:'Person1', email:'resident1@example.com', password:'1234'});
+      var u1 = new Resident({name:'Aimee', email:'aimeemarieknight@gmail.com', password:'9876'});
       u1.register(function(err, body){
         expect(err).to.not.be.ok;
         expect(u1.password).to.have.length(60);
