@@ -25,9 +25,9 @@ function load(app, fn){
   });
 
   passport.use(new FacebookStrategy({
-      clientID: '1430897753818675',
-      clientSecret: 'a1a805afc58ab0421b780187acd29a66',
-      callbackURL: 'http://192.168.11.193:4009/auth/facebook/callback'
+      clientID: '505396282898918',
+      clientSecret: FBCLIENTSECRET,
+      callbackURL: 'http://192.168.1.14:4009/auth/facebook/callback'
     },
 
     function(accessToken, refreshToken, profile, done){
@@ -38,10 +38,10 @@ function load(app, fn){
           if(user){
             return done(null, user);
           }else{
-            var newUser = new Resident({});
-            newUser.facebookId = profile.id;
-            newUser.name = profile.displayName;
-            newUser.insert(function(user){
+            var newResident = new Resident({});
+            newResident.facebookId = profile.id;
+            newResident.name = profile.displayName;
+            newResident.fbInsert(function(user){
               return done(null, user);
             });
           }
@@ -60,7 +60,7 @@ function load(app, fn){
   app.get('/auth/facebook/callback', d,
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('/listings');
+    res.redirect('/reports');
   });
 
   ////////// RESIDENTS //////////
@@ -69,6 +69,7 @@ function load(app, fn){
   app.post('/register', d, residents.create);
   app.get('/login', d, residents.login);
   app.post('/login', d, residents.authenticate);
+  app.get('/logout', d, residents.logout);
   app.post('/logout', d, residents.logout);
   app.get('/residents/:id', d, residents.show);
 

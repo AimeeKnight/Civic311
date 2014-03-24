@@ -30,7 +30,9 @@ html(class='no-js', lang='en')
           li: a(href="/register") Register
           li.divider
           li: a(href="/login") Login
-          if currentResident
+          li.divider
+          li.has-form: a(href='/auth/facebook').button.radius Facebook Login
+          if currentResident 
             li.divider
             li.has-form
               form(action='/logout'  method='POST' )
