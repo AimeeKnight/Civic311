@@ -4,7 +4,8 @@ var Report = require('../models/report');
 var Resident = require('../models/resident');
 var moment = require('moment');
 var Mongo = require('mongodb');
-var email = require('../lib/email');
+var idEmail = require('../lib/idEmail');
+var updateEmail = require('../lib/updateEmail');
 var _ = require('lodash');
 
 exports.fresh = function(req, res){
@@ -20,14 +21,14 @@ exports.create = function(req, res, fn){
     report.addPhoto(req.files.cover.path);
     report.insert(function(){
 
-      email.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
+      idEmail.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
         fn(err, body);
         res.redirect('/');
       });
     });
   }else{
     report.insert(function(){
-      email.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
+      idEmail.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
         fn(err, body);
         res.redirect('/');
       });
@@ -61,7 +62,7 @@ exports.update = function(req, res){
     Resident.findById(report.residentId.toString(), function(resident){
       var emailList = resident.email + ', '  + report.notifications.join(', ');
       console.log(emailList);
-      email.sendUpdate({to:emailList, name:resident.name, currentStatus:report.currentStatus}, function(err, body){
+      updateEmail.sendUpdate({to:emailList, name:resident.name, currentStatus:report.currentStatus}, function(err, body){
         report.update(function(){
           res.redirect('/reports/' + req.params.id);
         });

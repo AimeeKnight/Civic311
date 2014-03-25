@@ -4,7 +4,7 @@ module.exports = Employee;
 var Mongo = require('mongodb');
 var bcrypt = require('bcrypt');
 var employees = global.nss.db.collection('employees');
-var email = require('../lib/email');
+var tokenEmail = require('../lib/tokenEmail');
 
 /* ---------------------------------- *
  * Employee
@@ -29,7 +29,7 @@ Employee.prototype.register = function(fn){
     insert(self, function(err){
       var token = self.token;
       if(self._id){
-        email.sendAccess({to:self.email, token:token}, function(err, body){
+        tokenEmail.sendAccess({to:self.email, token:token}, function(err, body){
           fn(err, body);
         });
       }else{

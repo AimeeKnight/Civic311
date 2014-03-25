@@ -4,7 +4,7 @@ module.exports = Resident;
 var Mongo = require('mongodb');
 var bcrypt = require('bcrypt');
 var residents = global.nss.db.collection('residents');
-var email = require('../lib/email');
+var welcomeEmail = require('../lib/welcomeEmail');
 var _ = require('lodash');
 
 /* ---------------------------------- *
@@ -48,7 +48,8 @@ Resident.prototype.register = function(fn){
     self.password = hashedPwd;
     insert(self, function(err){
       if(self._id){
-        email.sendWelcome({to:self.email}, function(err, body){
+        welcomeEmail.sendWelcome({to:self.email}, function(err, body){
+          console.log('HHHHHHH', body);
           fn(err, body);
         });
       }else{
