@@ -18,9 +18,11 @@
     }
     findMyLocation();
     $('#search').click(clickSearch);
-    $('#limitButton').click(limitItems);
-    $('#prev').click(prevPage);
-    $('#next').click(nextPage);
+  }
+
+  function clickSearch(){
+    var limitVal = $('#limit').val();
+    window.location.href = ('/listings/?lat='+lat+'&lng='+lng+'&limit='+limitVal);
   }
 
   function findMyLocation(){

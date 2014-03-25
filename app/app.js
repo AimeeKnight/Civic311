@@ -11,7 +11,7 @@ var initMongo  = require('./lib/init-mongo');
 var initRoutes = require('./lib/init-routes');
 var lookupResident = require('./lib/lookup-resident');
 var lookupEmployee = require('./lib/lookup-employee');
-//var bounce = require('./lib/bounce');
+var bounce = require('./lib/bounce');
 var passport = require('passport');
 
 var app = express();
@@ -37,7 +37,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(lookupResident);
 app.use(lookupEmployee);
-//app.use(bounce);
+app.use(bounce);
 app.use(app.router);
 /* --- pipeline ends   */
 

@@ -8,7 +8,7 @@ exports.fresh = function(req, res){
 };
 
 exports.fbInfo = function(req, res){
-  if (req.user && !req.user.email){
+  if (req.user && req.user.email !== null){
     res.render('residents/update', {title: 'Please submit your email to receive notifications', fbResident:req.user});
   }else{
     res.redirect('/');
