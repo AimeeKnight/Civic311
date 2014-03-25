@@ -142,7 +142,6 @@ describe('residents', function(){
       });
     });
 
-
     describe('POST /logout', function(){
       it('should logout employee when logged in', function(done){
         request(app)

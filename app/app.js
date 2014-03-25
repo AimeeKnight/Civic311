@@ -1,4 +1,8 @@
 'use strict';
+console.log('MAILGUN !!!!!!!!!')
+console.log(process.env.MAILGUN);
+console.log('FB !!!!!!!!!')
+console.log(process.env.FB);
 
 var dbname = process.env.DBNAME;
 var port = process.env.PORT || 4000;
