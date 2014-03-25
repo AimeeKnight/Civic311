@@ -49,7 +49,6 @@ Resident.prototype.register = function(fn){
     insert(self, function(err){
       if(self._id){
         welcomeEmail.sendWelcome({to:self.email}, function(err, body){
-          console.log('HHHHHHH', body);
           fn(err, body);
         });
       }else{

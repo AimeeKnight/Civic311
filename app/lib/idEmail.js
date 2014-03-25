@@ -15,12 +15,6 @@ function send(data, fn){
   var key = process.env.MAILGUN;
   var url = 'https://api:' + key + '@api.mailgun.net/v2/aimeemarieknight.us/messages';
   var post = request.post(url, function(err, response, body){
-    console.log('AAAAAAAAAAAAAAAAAA', body);
-    console.log('AAAAAAAAAAAAAAAAAA', err);
-    console.log('AAAAAAAAAAAAAAAAAA', data.to);
-    console.log('AAAAAAAAAAAAAAAAAA', data.from);
-    console.log('AAAAAAAAAAAAAAAAAA', data.subject);
-    console.log('AAAAAAAAAAAAAAAAAA', data.response);
     fn(err, body);
   });
 
