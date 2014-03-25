@@ -55,7 +55,7 @@ describe('employees', function(){
   });
 
   describe('POST /admin/register', function(){
-    it('should register a new employee', function(done){
+    it('should register a new employee if the email domain is gmail', function(done){
       request(app)
       .post('/admin/register')
       .field('email', 'sue@gmail.com')
@@ -66,15 +66,48 @@ describe('employees', function(){
         done();
       });
     });
-    it('should not register a new employee', function(done){
+    it('should not register a new employee without a gmail address', function(done){
       request(app)
       .post('/admin/register')
       .field('email', 'bob@nomail.com')
       .field('password', '1234')
       .end(function(err, res){
         expect(res.status).to.equal(200);
-        expect(res.text).to.include('Register');
+        expect(res.text).to.include('Employee Registration');
         done();
+      });
+    });
+  });
+
+  describe('POST /admin/confirm', function(){
+    it('should complete registration of a new employee', function(done){
+      var sue2 = new employee({name:'Sue', email:'sue2@gmail.com', password:'1234', token:'12345678'});
+      sue2.register(function(){
+        request(app)
+        .post('/admin/confirm')
+        .field('email', 'sue2@gmail.com')
+        .field('password', '1234')
+        .field('token', '12345678')
+        .end(function(err, res){
+          expect(res.status).to.equal(302);
+          expect(res.text).to.equal('Moved Temporarily. Redirecting to /reports');
+          done();
+        });
+      });
+    });
+    it('should not register a new employee without a matching token', function(done){
+      var sue3 = new employee({name:'Sue', email:'sue3@gmail.com', password:'1234', token:'12345678'});
+      sue3.register(function(){
+        request(app)
+        .post('/admin/confirm')
+        .field('email', 'sue3@gmail.com')
+        .field('password', '1234')
+        .field('token', '00000000')
+        .end(function(err, res){
+          expect(res.status).to.equal(302);
+          expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
+          done();
+        });
       });
     });
   });
