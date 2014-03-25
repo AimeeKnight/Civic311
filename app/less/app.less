@@ -13,17 +13,14 @@ h1, h3,  h4, p, button, a{
   font-family: 'Lato', sans-serif !important;
 }
 
-#map{
-  width: 100%;
-  height: 250px;
-}
-
 .top-bar{
   background: #2980b9 !important;
+  padding-bottom: 2px solid #2980b9 !important;
 }
 
 .top-bar-section li:not(.has-form) a:not(.button) {
   background: #2980b9 !important;
+  padding-bottom: 2px solid #2980b9 !important;
 }
 
 .top-bar .name h1 a{
@@ -31,11 +28,14 @@ h1, h3,  h4, p, button, a{
 }
 
 .top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"]{
+  background: #2980b9 !important;
   border-right: solid 1px #bdc3c7;
+  padding-bottom: 2px solid #2980b9;
 }
 
 .top-bar-section .has-form {
   background: #2980b9 !important;
+  padding-bottom: 2px solid #2980b9;
 }
 
 #search {
@@ -43,7 +43,14 @@ h1, h3,  h4, p, button, a{
 }
 
 #map {
+  width: 100%;
+  height: 450px;
+  border: 4px solid #3498db;
   border-radius: 10px;
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  margin-bottom: 25px;
 }
 
 button.tiny {
@@ -91,10 +98,18 @@ h3 {
 ////////// REPORT PAGE //////////
 
 .report-img {
-  background-size: cover;
+  //background-size: cover;
+  background-size: 100% auto;
   width: 100%;
-  height: 350px;
+  height: 550px;
+  border-top: 3px solid #bdc3c7;
+  border-left: 3px solid #bdc3c7;
   border-radius: 10px;
+  margin-bottom: 25px;
+  padding-bottom: -45px;
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
 i {
@@ -115,6 +130,9 @@ i {
   text-align: center;
   border: 4px solid #3498db;
   margin-bottom: 35px;
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
 #p {

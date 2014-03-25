@@ -14,7 +14,8 @@ exports.fresh = function(req, res){
 
 exports.create = function(req, res, fn){
   var currentResident = res.locals.currentResident;
-  req.body.residentId = new Mongo.ObjectID(req.session.residentId);
+  req.body.residentId = new Mongo.ObjectID(res.locals.currentResident._id.toString());
+  
   var report = new Report(req.body);
 
   if (req.files.cover && req.files.cover.size !== 0){
@@ -28,7 +29,6 @@ exports.create = function(req, res, fn){
     });
   }else{
     report.insert(function(){
-      console.log('CCCCCCCCCCCCCC', currentResident);
       idEmail.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
         fn(err, body);
         res.redirect('/');

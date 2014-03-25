@@ -10,7 +10,6 @@ module.exports = function(req, res, next){
   }
   
   if (req.user){
-    console.log('!!!!!!!!!!!!!!!!!!!!!', req.user);
     Resident.findById(req.user._id, function(resident){
       res.locals.currentResident = resident;
     });
