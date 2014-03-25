@@ -4,6 +4,7 @@ var dbname = process.env.DBNAME;
 var port = process.env.PORT || 4000;
 
 var express    = require('express');
+var passport = require('passport');
 var less       = require('express-less');
 var session    = require('express-session');
 var RedisStore = require('connect-redis')(session);
@@ -12,7 +13,6 @@ var initRoutes = require('./lib/init-routes');
 var lookupResident = require('./lib/lookup-resident');
 var lookupEmployee = require('./lib/lookup-employee');
 var bounce = require('./lib/bounce');
-var passport = require('passport');
 
 var app = express();
 app.set('views', __dirname + '/views');

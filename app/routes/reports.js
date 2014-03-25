@@ -28,6 +28,7 @@ exports.create = function(req, res, fn){
     });
   }else{
     report.insert(function(){
+      console.log('CCCCCCCCCCCCCC', currentResident);
       idEmail.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
         fn(err, body);
         res.redirect('/');
