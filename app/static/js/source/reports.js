@@ -23,29 +23,6 @@
     $('#next').click(nextPage);
   }
 
-    //--------PAGING--------------//
-  function nextPage(){
-    var limitVal = $('#limit').val();
-    window.location.href = ('/listings/?lat='+lat+'&lng='+lng+'&limit='+limitVal+'&move=next');
-  }
-
-  function prevPage(){
-    var limitVal = $('#limit').val();
-    window.location.href = ('/listings/?lat='+lat+'&lng='+lng+'&limit='+limitVal+'&move=prev');
-  }
-
-  function limitItems(){
-    var limitVal = $('#limit').val();
-    window.location.href = ('/listings/?lat='+lat+'&lng='+lng+'&limit='+limitVal);
-  }
-
-  function clickSearch(){
-    var limitVal = $('#limit').val();
-    window.location.href = ('/listings/?lat='+lat+'&lng='+lng+'&limit='+limitVal);
-  }
-
-    //------------GOOGLE--------------//
-
   function findMyLocation(){
     getLocation();
   }
