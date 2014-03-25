@@ -87,7 +87,7 @@ describe('residents', function(){
       .field('password', '1234')
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        //expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
+        expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
         done();
       });
     });
@@ -136,6 +136,7 @@ describe('residents', function(){
         .set('cookie', cookie)
         .end(function(err, res){
           expect(res.status).to.equal(302);
+          expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
           done();
         });
       });
@@ -149,6 +150,7 @@ describe('residents', function(){
         .set('cookie', cookie)
         .end(function(err, res){
           expect(res.status).to.equal(302);
+          expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
           done();
         });
       });

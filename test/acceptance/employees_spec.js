@@ -181,6 +181,7 @@ describe('employees', function(){
         .set('cookie', cookie)
         .end(function(err, res){
           expect(res.status).to.equal(302);
+          expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
           done();
         });
       });

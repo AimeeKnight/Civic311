@@ -5,6 +5,7 @@ var app = require('../../app/app');
 var request = require('supertest');
 var fs = require('fs');
 var exec = require('child_process').exec;
+var expect = require('chai').expect;
 var Report;
 var Resident;
 var Employee;
@@ -132,11 +133,15 @@ describe('reports', function(){
         .field('address', '123 Main Street')
         .field('coordinates', [30, 30])
         .field('residentId', residentId)
-        .expect(302, done);
+        .end(function(err, res){
+          expect(res.status).to.equal(302);
+          expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
+          done();
+        });
       });
     });
 
-    describe('POST /reports', function(){
+    describe('POST /reports', function(err, res){
       it('should create a new report without a photo and send user back to home', function(done){
         request(app)
         .post('/reports')
@@ -147,33 +152,47 @@ describe('reports', function(){
         .field('description', 'Report1 Description')
         .field('address', '123 Main Street')
         .field('coordinates', [30, 30])
-        .expect(302, done);
-      });
-    });
-
-    describe('POST /reports/3', function(){
-      it('should edit a report and send user back to home', function(done){
-        var r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', residentId:residentId});
-        r1.insert(function(){
-          request(app)
-          .post('/reports/' + r1._id.toString())
-          .set('cookie', cookie)
-          .field('employeeId', employeeId)
-          .field('currentStatus', 'status update')
-          .expect(302, done);
+        .end(function(err, res){
+          expect(res.status).to.equal(302);
+          expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
+          done();
         });
       });
     });
 
-    describe('POST /reports/subscribe/3', function(){
+    describe('POST /reports/3', function(err, res){
+      it('should edit a report and send user back to the that report show page', function(done){
+        var r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', residentId:residentId});
+        r1.insert(function(){
+          var reportId = r1._id.toString();
+          request(app)
+          .post('/reports/' + reportId)
+          .set('cookie', cookie)
+          .field('employeeId', employeeId)
+          .field('currentStatus', 'status update')
+          .end(function(err, res){
+            expect(res.status).to.equal(302);
+            expect(res.text).to.equal('Moved Temporarily. Redirecting to /reports/' + reportId);
+            done();
+          });
+        });
+      });
+    });
+
+    describe('POST /reports/subscribe/3', function(err, res){
       it('should edit a report and send user back to home', function(done){
         var r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', residentId:residentId});
         r1.insert(function(){
+          var reportId = r1._id.toString();
           request(app)
-          .post('/reports/subscribe/' + r1._id.toString())
+          .post('/reports/subscribe/' + reportId)
           .set('cookie', cookie)
           .field('currentResident', residentId)
-          .expect(302, done);
+          .end(function(err, res){
+            expect(res.status).to.equal(302);
+            expect(res.text).to.equal('Moved Temporarily. Redirecting to /reports/' + reportId);
+            done();
+          });
         });
       });
     });
