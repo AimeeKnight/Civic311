@@ -43,7 +43,7 @@ describe('employee', function(){
       //var u1 = new Employee({name:'Person2', email:'aimeemarieknight@gmail.com', password:'9876'});
       var u1 = new Employee({name:'Person2', email:'aimeemarieknight@nomail.com', password:'9876'});
       u1.register(function(err, body){
-        expect(err).to.be.null;
+        expect(err).to.be.undefined;
         expect(u1.password).to.have.length(60);
         expect(u1._id).to.be.instanceof(Mongo.ObjectID);
         //body = JSON.parse(body);

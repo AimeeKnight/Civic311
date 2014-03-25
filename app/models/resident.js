@@ -48,10 +48,9 @@ Resident.prototype.register = function(fn){
     self.password = hashedPwd;
     insert(self, function(err){
       if(self._id){
-        //welcomeEmail.sendWelcome({to:self.email}, function(err, body){
-          //fn(err, body);
-        //});
-        fn(err);
+        welcomeEmail.sendWelcome({to:self.email}, function(err, body){
+          fn(err, body);
+        });
       }else{
         fn();
       }

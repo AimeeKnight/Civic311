@@ -4,8 +4,9 @@ var request = require('request');
 var fs = require('fs');
 var jade = require('jade');
 
+////////// WELCOME //////////
 exports.sendWelcome = function(data, fn){
-  send({from:'admin@aimeemarieknight.us', to:data.to, subject:'Welcome to AirBnB', template:'welcome'}, fn);
+  send({from:'admin@aimeemarieknight.us', to:data.to, subject:'Welcome to Civic 311', template:'welcome'}, fn);
 };
 
 function send(data, fn){

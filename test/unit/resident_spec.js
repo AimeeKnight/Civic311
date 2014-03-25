@@ -53,12 +53,11 @@ describe('resident', function(){
       var u1 = new Resident({name:'Aimee', email:'aimeemarieknight@gmail.com', password:'9876'});
       //var u1 = new Resident({name:'Aimee', email:'aimeemarieknight@nomail.com', password:'9876'});
       u1.register(function(err, body){
-        expect(err).to.be.null;
+        expect(err).to.be.undefined;
         expect(u1.password).to.have.length(60);
         expect(u1._id).to.be.instanceof(Mongo.ObjectID);
-        //console.log('!!!!!!!!!!!!!', body);
-        //body = JSON.parse(body);
-        //expect(body.id).to.be.ok;
+        body = JSON.parse(body);
+        expect(body.id).to.be.ok;
         done();
       });
     });
