@@ -8,7 +8,7 @@
     $(document).foundation();
     $('#id-status').click(checkStatusById);
     $('#complete').geocomplete();
-    $.fn.geocomplete('#complete');
+    //$.fn.geocomplete('#complete');
   }
 
   function checkStatusById(){

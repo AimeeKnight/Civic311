@@ -8,5 +8,5 @@ after_script:
   - npm run coveralls
 env:
   global:
-    secure: 'NxlOOTAtd6NjVEvZ4f80U61LOERS9esczm/cuIQNkMfX6WvQTiwlJ7G2IuBc269I2GBWSaMdc2NzLj/zOMZSUodQzq27CpfcDULV4J3s8Vqj9T8c7XMLaZiTV3bFpKlnsa2y5o0/cuZaYCMKvZbOeFTqJEZhw860ki6fP0b+Has='
-    secure: 'VXVABCsYRzvSLxJY19dPvMKYQljFtqhxxKCiEs1721zzPtPRxKbryIbt3nRRyozpqrYN8eunBhfoRRZWDqaSyYSZK/tXkzKyDS1IHO3pJR7Sjcun+OXwn6Wvzyd8n7SB3/dIBJiT67oD55DApPQaxBfv6OQFY5GgifWY9/FFwIw='
+    - secure: 'NxlOOTAtd6NjVEvZ4f80U61LOERS9esczm/cuIQNkMfX6WvQTiwlJ7G2IuBc269I2GBWSaMdc2NzLj/zOMZSUodQzq27CpfcDULV4J3s8Vqj9T8c7XMLaZiTV3bFpKlnsa2y5o0/cuZaYCMKvZbOeFTqJEZhw860ki6fP0b+Has='
+    - secure: 'VXVABCsYRzvSLxJY19dPvMKYQljFtqhxxKCiEs1721zzPtPRxKbryIbt3nRRyozpqrYN8eunBhfoRRZWDqaSyYSZK/tXkzKyDS1IHO3pJR7Sjcun+OXwn6Wvzyd8n7SB3/dIBJiT67oD55DApPQaxBfv6OQFY5GgifWY9/FFwIw='
