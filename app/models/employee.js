@@ -29,9 +29,10 @@ Employee.prototype.register = function(fn){
     insert(self, function(err){
       var token = self.token;
       if(self._id){
-        tokenEmail.sendAccess({to:self.email, token:token}, function(err, body){
-          fn(err, body);
-        });
+        //tokenEmail.sendAccess({to:self.email, token:token}, function(err, body){
+          //fn(err, body);
+        //});
+        fn(err);
       }else{
         fn();
       }
