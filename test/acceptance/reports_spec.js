@@ -215,6 +215,15 @@ describe('reports', function(){
       });
     });
 
+    describe('GET /reports/query', function(){
+      it('should display the reports index page populated with reports be geolocation', function(done){
+        request(app)
+        .get('/reports/query')
+        .set('cookie', cookie)
+        .expect(200, done);
+      });
+    });
+
   });
 /////
 });
