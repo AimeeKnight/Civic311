@@ -28,10 +28,10 @@ function Report(report){
   this.photo = this.photo || null;
 
   // true === 'on' false === null
-  if (report.donatable === 'on'){
-    this.donatabale = true;
+  if (report.donate === 'on'){
+    this.donate = 'true';
   }else{
-    this.donatable = false;
+    this.donate = 'false';
   }
 }
 
@@ -76,6 +76,12 @@ Report.findById = function(id, fn){
 
 Report.findPublic = function(fn){
   reports.find({visibility:'public'}).toArray(function(err, reports){
+    fn(reports);
+  });
+};
+
+Report.findDonate = function(fn){
+  reports.find({donate:'true'}).toArray(function(err, reports){
     fn(reports);
   });
 };

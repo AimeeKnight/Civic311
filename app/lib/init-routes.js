@@ -91,6 +91,7 @@ function load(app, fn){
   app.get('/reports', d, reports.index);
   app.get('/reports/admin', d, reports.adminIndex);
   app.get('/reports/query', d, reports.geoQuery);
+  app.get('/reports/donations', d, reports.donationsIndex);
   app.get('/reports/:id', d, reports.show);
   app.post('/reports/:id', d, reports.update);
   app.post('/reports/subscribe/:id', d, reports.subscribe);

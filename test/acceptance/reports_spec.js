@@ -103,6 +103,13 @@ describe('reports', function(){
         .expect(200, done);
       });
 
+      it('should display the reports donation index page', function(done){
+        request(app)
+        .get('/reports/donations')
+        .set('cookie', cookie)
+        .expect(200, done);
+      });
+
       it('should display the report show page', function(done){
         request(app)
         .get('/reports/' + reportId)

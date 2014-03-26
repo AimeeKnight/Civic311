@@ -50,6 +50,12 @@ exports.adminIndex = function(req, res){
   });
 };
 
+exports.donationsIndex = function(req, res){
+  Report.findDonate(function(reports){
+    res.render('reports/donations', {reports:reports, title: 'Report Donations'});
+  });
+};
+
 exports.show = function(req, res){
   Report.findById(req.params.id, function(report){
     res.render('reports/show', {moment:moment, report:report});

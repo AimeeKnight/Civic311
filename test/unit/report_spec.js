@@ -107,7 +107,7 @@ describe('Report', function(){
     var r1, r2, r3;
 
     beforeEach(function(done){
-      r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60'});
+      r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', donate:'on'});
       r2 = new Report({name:'Test ReportB', date:'2012-03-26', lat:'40', lng:'70'});
       r3 = new Report({name:'Test ReportC', date:'2012-03-27', lat:'50', lng:'80'});
 
@@ -141,10 +141,20 @@ describe('Report', function(){
     });
 
     describe('.findPublic', function(){
-      it('should find all public reports in the  database', function(done){
+      it('should find all public reports in the database', function(done){
         Report.findPublic(function(reports){
           expect(reports[0]._id).to.deep.equal(r1._id);
           expect(reports).to.have.length(3);
+          done();
+        });
+      });
+    });
+
+    describe('.findDonate', function(){
+      it('should find all donatable reports in the database', function(done){
+        Report.findDonate(function(reports){
+          expect(reports[0]._id).to.deep.equal(r1._id);
+          expect(reports).to.have.length(1);
           done();
         });
       });
