@@ -94,6 +94,7 @@ function load(app, fn){
   app.get('/reports/:id', d, reports.show);
   app.post('/reports/:id', d, reports.update);
   app.post('/reports/subscribe/:id', d, reports.subscribe);
+  app.post('/reports/donatable/:id', d, reports.setDonate);
   app.post('/reports/donate/:id', d, reports.donate);
   console.log('Routes Loaded');
   fn();

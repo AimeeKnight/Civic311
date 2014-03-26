@@ -84,6 +84,21 @@ exports.subscribe = function(req, res){
   });
 };
 
+exports.setDonate = function(req, res){
+  var donatable = req.body.donatable;
+  // true === 'on' false === null
+  Report.findById(req.params.id, function(report){
+    if (donatable === 'on'){
+      report.donatabale = true;
+    }else{
+      report.donatable = false;
+    }
+    report.update(function(){
+      res.redirect('/reports/' + req.params.id);
+    });
+  });
+};
+
 exports.donate = function(req, res){
   var stripe = require('stripe')(key);
   var token = req.body.stripeToken;

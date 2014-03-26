@@ -3,7 +3,7 @@ extends ../shared/template
 block content
   h1= title
 
-  form(action='/reports', method='post', enctype='multipart/form-data')
+  form.dropzone(action='/reports', method='post', enctype='multipart/form-data')
     label Name
     input(type='text', name='name', required, autofocus='true')
     label Address
@@ -19,13 +19,15 @@ block content
     input(type="checkbox", name="visibility", checked=(true===false ? "checked" : undefined))
     br
     label Picture
-    input(type='file', name='cover')
+    input#dropzone-input(type='file', name='cover')
+    .dropzone.dropzone-previews#my-awesome-dropzone
     input(type='hidden', name='residentId')
     br
     button.small.radius#create Submit Report
 
 block scripts
   script(src='/js/source/new-report.js')
+  //script(src='/js/vendor/dropzone.js')
   //script(src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false")
   //script(src='/js/vendor/jquery.geocomplete.min.js')
 

@@ -11,6 +11,7 @@ var _ = require('lodash');
 function Report(report){
   this.name = report.name || null;
   this.date = new Date(report.date) || new Date();
+
   // true === 'on' false === null
   if (report.visibility === 'on'){
     this.visibility = 'private';
@@ -25,7 +26,13 @@ function Report(report){
   this.notifications = report.notifications || [];
   this.coordinates = [report.lat * 1, report.lng * 1] || null;
   this.photo = this.photo || null;
-  this.pledge = this.pledge || null;
+
+  // true === 'on' false === null
+  if (report.donatable === 'on'){
+    this.donatabale = true;
+  }else{
+    this.donatable = false;
+  }
 }
 
 Report.prototype.addPhoto = function(oldpath){
