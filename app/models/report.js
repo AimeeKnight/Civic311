@@ -26,12 +26,14 @@ function Report(report){
   this.notifications = report.notifications || [];
   this.coordinates = [report.lat * 1, report.lng * 1] || null;
   this.photo = this.photo || null;
+  this.amount = this.amount || null;
+  this.donors = this.donors || [];
 
   // true === 'on' false === null
   if (report.donate === 'on'){
-    this.donate = 'true';
+    this.donate = true;
   }else{
-    this.donate = 'false';
+    this.donate = false;
   }
 }
 
@@ -81,7 +83,8 @@ Report.findPublic = function(fn){
 };
 
 Report.findDonate = function(fn){
-  reports.find({donate:'true'}).toArray(function(err, reports){
+  //reports.find({donate:'true', $or: [{visibility: 'public'}]}).toArray(function(err, reports){
+  reports.find({donate:true}).toArray(function(err, reports){
     fn(reports);
   });
 };

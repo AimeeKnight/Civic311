@@ -52,6 +52,7 @@ exports.adminIndex = function(req, res){
 
 exports.donationsIndex = function(req, res){
   Report.findDonate(function(reports){
+    console.log(reports);
     res.render('reports/donations', {reports:reports, title: 'Report Donations'});
   });
 };
@@ -69,7 +70,6 @@ exports.update = function(req, res){
 
     Resident.findById(report.residentId.toString(), function(resident){
       var emailList = resident.email + ', '  + report.notifications.join(', ');
-      console.log(emailList);
       updateEmail.sendUpdate({to:emailList, name:resident.name, currentStatus:report.currentStatus}, function(err, body){
         report.update(function(){
           res.redirect('/reports/' + req.params.id);
@@ -91,13 +91,13 @@ exports.subscribe = function(req, res){
 };
 
 exports.setDonate = function(req, res){
-  var donatable = req.body.donatable;
+  var donate = req.body.donate;
   // true === 'on' false === null
   Report.findById(req.params.id, function(report){
-    if (donatable === 'on'){
-      report.donatabale = true;
+    if (donate === 'on'){
+      report.donate = true;
     }else{
-      report.donatable = false;
+      report.donate = false;
     }
     report.update(function(){
       res.redirect('/reports/' + req.params.id);
@@ -108,6 +108,12 @@ exports.setDonate = function(req, res){
 exports.donate = function(req, res){
   var stripe = require('stripe')(key);
   var token = req.body.stripeToken;
+  var amount = req.body.amount / 100;
+
+  var newDonor = {};
+  newDonor.donorId = new Mongo.ObjectID(req.body.donorId);
+  newDonor.donorName = req.body.donorName;
+  newDonor.donorEmail = req.body.donorEmail;
 
   stripe.charges.create({
     amount: req.body.amount,
@@ -116,7 +122,13 @@ exports.donate = function(req, res){
     description: 'Donation'
   });
 
-  res.redirect('/reports/' + req.params.id);
+  Report.findById(req.params.id, function(report){
+    report.amount += amount;
+    report.donors.push(newDonor);
+    report.update(function(){
+      res.redirect('/reports/' + req.params.id);
+    });
+  });
 };
 
 exports.geoQuery = function(req, res){

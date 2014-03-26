@@ -22,7 +22,7 @@ block content
       input(type='hidden', name='currentResident', value= currentResident._id)
       button.alert.small.radius Subscribe to updates
 
-  if report.donatable === true
+  if report.donate === true
     h3 Donate to This Report
       select#donation
         option Select a Donation
@@ -35,6 +35,9 @@ block content
 
       form#donate(action='/reports/donate/' + report._id, method='post')
         input(type='hidden', name="amount", value="#")
+        input(type='hidden', name="donorId", value= currentResident._id)
+        input(type='hidden', name="donorName", value= currentResident.name)
+        input(type='hidden', name="donorEmail", value= currentResident.email)
         script(class='stripe-button',
           data-key='pk_test_OQsSptYh5O6y7yY7Q6TWVJiX',
           data-image='/img/stripe.png',
@@ -52,7 +55,7 @@ block content
     form(action='/reports/donatable/' + report._id, method='post')
       label Allow Donations?
       br
-      input(type="checkbox", name="donatable", checked=(true===false ? "checked" : undefined))
+      input(type="checkbox", name="donate", checked=(true===false ? "checked" : undefined))
       &nbsp;
       &nbsp;
       button.alert.small.radius Open Report to Donations

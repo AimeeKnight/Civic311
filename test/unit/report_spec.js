@@ -107,7 +107,7 @@ describe('Report', function(){
     var r1, r2, r3;
 
     beforeEach(function(done){
-      r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', donate:'on'});
+      r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', visibility:'public', donate:'on'});
       r2 = new Report({name:'Test ReportB', date:'2012-03-26', lat:'40', lng:'70'});
       r3 = new Report({name:'Test ReportC', date:'2012-03-27', lat:'50', lng:'80'});
 
