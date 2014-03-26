@@ -6,21 +6,37 @@ block content
   if report.photo
     .report-img(style='background-image:url("' + report.photo + '")')
 
-  h4#h4 <i class="fa fa-flag"></i>&nbsp Report Name
+  h4#h4 <i class='fa fa-flag'></i>&nbsp Report Name
     p#p= report.name
-  h4#h4 <i class="fa fa-calendar"></i>&nbsp Date
+  h4#h4 <i class='fa fa-calendar'></i>&nbsp Date
     p#p= moment(report.date).format('MMMM Do, YYYY')
-  h4#h4 <i class="fa fa-warning"></i>&nbsp Details
+  h4#h4 <i class='fa fa-warning'></i>&nbsp Details
     p#p= report.description
-  h4#h4 <i class="fa fa-map-marker"></i>&nbsp Address
+  h4#h4 <i class='fa fa-map-marker'></i>&nbsp Address
     p#p= report.address
-  h4#h4 <i class="fa fa-comment-o"></i>&nbsp Status
+  h4#h4 <i class='fa fa-comment-o'></i>&nbsp Status
     p#p= report.currentStatus
 
   if currentResident
     form(action='/reports/subscribe/' + report._id, method='post')
       input(type='hidden', name='currentResident', value= currentResident._id)
       button.alert.small.radius Subscribe to updates
+
+  if currentResident
+    select#donation
+      option Select a Donation
+      option $5.00
+      option $15.00
+      option $25.00
+
+    form#donate(action='/reports/donate/' + report._id, method='post')
+      input(type='hidden', name="amount", value="#")
+      script(class='stripe-button',
+        data-key='pk_test_OQsSptYh5O6y7yY7Q6TWVJiX',
+        data-image='/img/stripe.png',
+        data-name='Civic 311',
+        data-description='Donation',
+        data-amount='3000')
 
   if currentEmployee
     form(action='/reports/' + report._id, method='post')

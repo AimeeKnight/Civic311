@@ -25,6 +25,7 @@ function Report(report){
   this.notifications = report.notifications || [];
   this.coordinates = [report.lat * 1, report.lng * 1] || null;
   this.photo = this.photo || null;
+  this.pledge = this.pledge || null;
 }
 
 Report.prototype.addPhoto = function(oldpath){

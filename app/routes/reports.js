@@ -7,6 +7,7 @@ var Mongo = require('mongodb');
 var idEmail = require('../lib/idEmail');
 var updateEmail = require('../lib/updateEmail');
 var _ = require('lodash');
+var key = process.env.STRIPE;
 
 exports.fresh = function(req, res){
   res.render('reports/fresh', {title: 'New Report'});
@@ -81,6 +82,20 @@ exports.subscribe = function(req, res){
       });
     });
   });
+};
+
+exports.donate = function(req, res){
+  var stripe = require('stripe')(key);
+  var token = req.body.stripeToken;
+
+  stripe.charges.create({
+    amount: req.body.amount,
+    currency: 'usd',
+    card: token, // obtained with Stripe.js
+    description: 'Donation'
+  });
+
+  res.redirect('/reports/' + req.params.id);
 };
 
 exports.geoQuery = function(req, res){

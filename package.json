@@ -26,7 +26,8 @@
     "express-session": "*",
     "passport":        "*",
     "passport-facebook": "*",
-    "gravatar":        "*"
+    "gravatar":          "*",
+    "stripe":            "*"
   },
   "devDependencies": {
     "grunt":                "*",

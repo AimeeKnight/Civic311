@@ -8,5 +8,6 @@ after_script:
   - npm run coveralls
 env:
   global:
-    - secure: 'NxlOOTAtd6NjVEvZ4f80U61LOERS9esczm/cuIQNkMfX6WvQTiwlJ7G2IuBc269I2GBWSaMdc2NzLj/zOMZSUodQzq27CpfcDULV4J3s8Vqj9T8c7XMLaZiTV3bFpKlnsa2y5o0/cuZaYCMKvZbOeFTqJEZhw860ki6fP0b+Has='
-    - secure: 'VXVABCsYRzvSLxJY19dPvMKYQljFtqhxxKCiEs1721zzPtPRxKbryIbt3nRRyozpqrYN8eunBhfoRRZWDqaSyYSZK/tXkzKyDS1IHO3pJR7Sjcun+OXwn6Wvzyd8n7SB3/dIBJiT67oD55DApPQaxBfv6OQFY5GgifWY9/FFwIw='
+    - secure: 'cBo9CD0VoCfRFPW8TQMcxh8n5dyF0Daf9NDjy92YuE7vszpeJAf/lWP35yAn1abi7WT850jjtp1mVqc0gdb2xF4Fe819POJ866rgLDWwqvcJeE/4ixB2P9pWEtjOsauTAOJ+uGkp0nihX7gsU3/J9I7AEJLqk+Pwm/rqGUjghSo='
+    - secure: 'nbFKIDCWC5Z9xffUX7r6wult3BhtP7Af3QNCAq4VjSrJ32M2VWFIHoegPOqykRx5EpvMJV7rzk4+UXUni9g7eTiU097d5RqFOAJ7jfapqowf2EHpM5K9Bp6QUOtZDdYfj2SRnWI0iydqw1G3zPDcSP2r/qd899bd30ChhbdtgG0='
+    - secure: 'BTHMg94e7PuswkPFGilZLPDxCvlvt/M6h8prGbD4JU7erVUnlJaqigJs5Qy0onzA9KdHb4B4WoTPMvCEyKmFIO6FZkVLWpCnAzkzB3yI2LW1fsIydiaw53M71U49uTD4LhU35+fu4IHfiEOXpiKQt5L1JILPebXU0hlAQsoGupo='
