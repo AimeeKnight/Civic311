@@ -21,7 +21,7 @@
     var donation = $('#donation option:selected').text();
     donation = donation.replace(/\$/g, '');
     donation *= 100;
-    $('#donate input[name="hidden"]').val(donation);
+    $('#donate input[name="amount"]').val(donation);
     $('#donate > script').attr('data-amount', donation);
     $('#donate > script').attr('src', 'https://checkout.stripe.com/checkout.js');
   }

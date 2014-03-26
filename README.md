@@ -18,6 +18,8 @@ _The folowing technologies were used in the creation of this app..._
 - Bcrypt
 - Lo-Dash
 - Less
+- Zurb Foundation
+- Font Awesome
 - Jade
 - Request
 - Grunt
@@ -33,3 +35,4 @@ _The folowing technologies were used in the creation of this app..._
 - Facebook API
 - Passport
 - OAuth
+- Stripe
