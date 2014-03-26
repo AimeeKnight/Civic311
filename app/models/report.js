@@ -83,8 +83,7 @@ Report.findPublic = function(fn){
 };
 
 Report.findDonate = function(fn){
-  //reports.find({donate:'true', $or: [{visibility: 'public'}]}).toArray(function(err, reports){
-  reports.find({donate:true}).toArray(function(err, reports){
+  reports.find({donate:true, $or: [{visibility: 'public'}]}).toArray(function(err, reports){
     fn(reports);
   });
 };

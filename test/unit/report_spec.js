@@ -49,6 +49,38 @@ describe('Report', function(){
     });
   });
 
+  describe('new', function(){
+    it('should create a new Report object with private visibility', function(){
+      var o = {};
+      o.name = 'Test Report1';
+      o.date = '2010-03-25';
+      o.lat = '32';
+      o.lng = '32';
+      o.visibility = 'on';
+      var r1 = new Report(o);
+      expect(r1).to.be.instanceof(Report);
+      expect(r1.name).to.equal('Test Report1');
+      expect(r1.visibility).to.equal('private');
+      expect(r1.date).to.be.instanceof(Date);
+    });
+  });
+
+  describe('new', function(){
+    it('should create a new Report object that allows donations', function(){
+      var o = {};
+      o.name = 'Test Report1';
+      o.date = '2010-03-25';
+      o.lat = '32';
+      o.lng = '32';
+      o.donate = 'on';
+      var r1 = new Report(o);
+      expect(r1).to.be.instanceof(Report);
+      expect(r1.name).to.equal('Test Report1');
+      expect(r1.donate).to.equal(true);
+      expect(r1.date).to.be.instanceof(Date);
+    });
+  });
+
   describe('#addPhoto', function(){
     it('should add a photo to the Report', function(){
       var o = {};
