@@ -180,7 +180,7 @@ describe('reports', function(){
     });
 
     describe('POST /reports/subscribe/3', function(err, res){
-      it('should edit a report and send user back to home', function(done){
+      it('should edit a report and send user back to the report show page', function(done){
         var r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', residentId:residentId});
         r1.insert(function(){
           var reportId = r1._id.toString();
@@ -188,6 +188,24 @@ describe('reports', function(){
           .post('/reports/subscribe/' + reportId)
           .set('cookie', cookie)
           .field('currentResident', residentId)
+          .end(function(err, res){
+            expect(res.status).to.equal(302);
+            expect(res.text).to.equal('Moved Temporarily. Redirecting to /reports/' + reportId);
+            done();
+          });
+        });
+      });
+    });
+
+    describe('POST /reports/donate/3', function(err, res){
+      it('should donate to a report and send user back to the report show page', function(done){
+        var r1 = new Report({name:'Test ReportA', date:'2012-03-25', lat:'30', lng:'60', residentId:residentId});
+        r1.insert(function(){
+          var reportId = r1._id.toString();
+          request(app)
+          .post('/reports/donate/' + reportId)
+          .set('cookie', cookie)
+          .field('amount', 15)
           .end(function(err, res){
             expect(res.status).to.equal(302);
             expect(res.text).to.equal('Moved Temporarily. Redirecting to /reports/' + reportId);
