@@ -17,12 +17,12 @@ block content
         span= report.amount
         br
         br
-        span Donors:
+        span#donor-pics Donors:
 
+      .gravatar-img
       for donor in report.donors
-        .gravatar-img
-          p= donor.donorName
-          p#email= donor.donorEmail
+        .donor-name= donor.donorName
+        .email= donor.donorEmail
 
 block scripts
   script(src='/js/vendor/md5.js')
