@@ -8,6 +8,7 @@ var idEmail = require('../lib/idEmail');
 var updateEmail = require('../lib/updateEmail');
 var _ = require('lodash');
 var key = process.env.STRIPE;
+//var gravatar = require('gravatar');
 
 exports.fresh = function(req, res){
   res.render('reports/fresh', {title: 'New Report'});
@@ -22,7 +23,6 @@ exports.create = function(req, res, fn){
   if (req.files.cover && req.files.cover.size !== 0){
     report.addPhoto(req.files.cover.path);
     report.insert(function(){
-
       idEmail.sendId({to:currentResident.email, name:currentResident.name, reportId:report._id.toString()}, function(err, body){
         fn(err, body);
         res.redirect('/');
@@ -52,7 +52,6 @@ exports.adminIndex = function(req, res){
 
 exports.donationsIndex = function(req, res){
   Report.findDonate(function(reports){
-    console.log(reports);
     res.render('reports/donations', {reports:reports, title: 'Report Donations'});
   });
 };

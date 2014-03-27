@@ -22,7 +22,7 @@ block content
       input(type='hidden', name='currentResident', value= currentResident._id)
       button.alert.small.radius Subscribe to updates
 
-  if report.donate === true
+  if currentResident && report.donate === true
     h3 Donate to This Report
       select#donation
         option Select a Donation
@@ -33,16 +33,17 @@ block content
         option $75.00
         option $100.00
 
-      form#donate(action='/reports/donate/' + report._id, method='post')
-        input(type='hidden', name="amount", value="#")
-        input(type='hidden', name="donorId", value= currentResident._id)
-        input(type='hidden', name="donorName", value= currentResident.name)
-        input(type='hidden', name="donorEmail", value= currentResident.email)
-        script(class='stripe-button',
-          data-key='pk_test_OQsSptYh5O6y7yY7Q6TWVJiX',
-          data-image='/img/stripe.png',
-          data-name='Civic 311',
-          data-description='Donation',
+  if currentResident
+    form#donate(action='/reports/donate/' + report._id, method='post')
+      input(type='hidden', name="amount", value="#")
+      input(type='hidden', name="donorId", value= currentResident._id)
+      input(type='hidden', name="donorName", value= currentResident.name)
+      input(type='hidden', name="donorEmail", value= currentResident.email)
+      script(class='stripe-button',
+        data-key='pk_test_OQsSptYh5O6y7yY7Q6TWVJiX',
+        data-image='/img/stripe.png',
+        data-name='Civic 311',
+        data-description='Donation',
           data-amount='3000')
 
   if currentEmployee

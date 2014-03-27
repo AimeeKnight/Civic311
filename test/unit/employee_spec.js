@@ -55,6 +55,7 @@ describe('employee', function(){
       var u1 = new Employee({name:'Person1', email:'bob@nomail.com', password:'1234'});
       u1.register(function(err){
         expect(u1._id).to.be.undefined;
+        expect(err).to.be.undefined;
         done();
       });
     });
