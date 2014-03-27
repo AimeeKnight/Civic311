@@ -6,16 +6,17 @@ block content
   if report.photo
     .report-img(style='background-image:url("' + report.photo + '")')
 
-  h4#h4 <i class='fa fa-flag'></i>&nbsp; Report Name
-    p#p= report.name
-  h4#h4 <i class='fa fa-calendar'></i>&nbsp; Date
-    p#p= moment(report.date).format('MMMM Do, YYYY')
-  h4#h4 <i class='fa fa-warning'></i>&nbsp; Details
-    p#p= report.description
-  h4#h4 <i class='fa fa-map-marker'></i>&nbsp; Address
-    p#p= report.address
-  h4#h4 <i class='fa fa-comment-o'></i>&nbsp; Status
-    p#p= report.currentStatus
+  .report-info
+    h4#h4 <i class='fa fa-flag'></i>&nbsp; Report Name
+      p#p= report.name
+    h4#h4 <i class='fa fa-calendar'></i>&nbsp; Date
+      p#p= moment(report.date).format('MMMM Do, YYYY')
+    h4#h4 <i class='fa fa-warning'></i>&nbsp; Details
+      p#p= report.description
+    h4#h4 <i class='fa fa-map-marker'></i>&nbsp; Address
+      p#p= report.address
+    h4#h4 <i class='fa fa-comment-o'></i>&nbsp; Status
+      p#p= report.currentStatus
 
   if currentResident
     form(action='/reports/subscribe/' + report._id, method='post')

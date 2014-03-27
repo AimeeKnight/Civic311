@@ -7,20 +7,20 @@ block content
 
     .report-donations
       h2#h4 <i class='fa fa-flag'></i>
-        &nbsp; 
+        &nbsp;
         span= report.name
       h4 Current Donations
-        p#p 
+        p.p#amount
           span $
           &nbsp;
           span= report.amount
 
-      h4 Donors 
-        for donor in report.donors
-          ul
-            li#email= donor.donorEmail
-            .gravatar-img
-            li= donor.donorName
+      h4 Donors
+
+      for donor in report.donors
+        .gravatar-img
+          p= donor.donorName
+          p#email= donor.donorEmail
 
 block scripts
   script(src='/js/vendor/md5.js')

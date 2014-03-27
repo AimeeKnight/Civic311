@@ -32,21 +32,29 @@ html(class='no-js', lang='en')
           li.divider
           li: a(href="/login") Login
           li.divider
-          li.has-form: a(href='/auth/facebook').button.radius Facebook Login
+          li.has-form: a(href='/auth/facebook').button.radius.navbtn#fb Facebook Login
           if currentResident 
             li.divider
             li.has-form
               form(action='/logout'  method='POST' )
-                button.tiny.radius.space Logout
+                button.tiny.radius.space.navbtn Logout
           if currentEmployee
             li.divider
             li.has-form
               form(action='/admin/logout'  method='POST' )
-                button.tiny.radius.space Logout
+                button.tiny.radius.space.navbtn Logout
 
     .row
       .small-12.columns
         block content
+
+    #footer-panel
+      .row
+        .small-12.columns
+          li: a(href="/admin/register") Admin Registration
+          li: a(href="/admin/login") Admin Login
+          li: a(href="/admin/confirm") Token Confirmation
+          li: a(href="#") Terms
 
     script(src='/js/vendor/jquery.js')
     script(src='/js/vendor/foundation.min.js')

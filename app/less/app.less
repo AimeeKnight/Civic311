@@ -8,19 +8,19 @@ body{
 }
 
 ////////// FONTS //////////
-
-h1, h3,  h4, p, button, a{
+h1, h3,  h4, p, button, a, span{
   font-family: 'Lato', sans-serif !important;
 }
 
 .top-bar{
-  background: #2980b9 !important;
-  padding-bottom: 2px solid #2980b9 !important;
+  background: #3498db !important;
+  padding-bottom: 2px solid #3498db !important;
+  margin-bottom: 50px;
 }
 
 .top-bar-section li:not(.has-form) a:not(.button) {
-  background: #2980b9 !important;
-  padding-bottom: 2px solid #2980b9 !important;
+  background: #3498db !important;
+  padding-bottom: 2px solid #3498db !important;
 }
 
 .top-bar .name h1 a{
@@ -28,14 +28,20 @@ h1, h3,  h4, p, button, a{
 }
 
 .top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"]{
-  background: #2980b9 !important;
+  background: #3498db !important;
   border-right: solid 1px #bdc3c7;
-  padding-bottom: 2px solid #2980b9;
+  padding-bottom: 2px solid #3498db;
 }
 
 .top-bar-section .has-form {
-  background: #2980b9 !important;
-  padding-bottom: 2px solid #2980b9;
+  background: #3498db !important;
+  padding-bottom: 2px solid #3498db;
+}
+
+////////// HOME //////////
+#label {
+  color: #2c3e50;
+  font-size: 14px;
 }
 
 #search {
@@ -55,7 +61,14 @@ h1, h3,  h4, p, button, a{
 
 button.tiny {
   margin-top: 4px;
-  color: #2980b9 !important;
+  color: #3498db !important;
+  background: #ecf0f1 !important;
+  font-weight: 600 !important;
+  font-size: 12px;
+}
+
+#fb {
+  color: #3498db !important;
   background: #ecf0f1 !important;
   font-weight: 600;
 }
@@ -63,10 +76,14 @@ button.tiny {
 h1, h3 {
   font-family: 'Varela Round', sans-serif !important;
   font-size: 3.75rem;
-  color: #2980b9;
+  color: #3498db;
   font-weight: 900;
   text-align: center;
   margin-top: 20px;
+}
+
+h1 {
+  text-transform: uppercase;
 }
 
 h3 {
@@ -96,7 +113,6 @@ h3 {
 }
 
 ////////// REPORT PAGE //////////
-
 .report-img {
   //background-size: cover;
   background-size: 100% auto;
@@ -116,11 +132,14 @@ i {
   background-color: #fff;
   padding: 11px;
   border-radius: 100%;
-  border: 3px solid #2980b9;
+  border: 5px solid #80B929;
+}
+
+.fa.fa-flag {
 }
 
 #home-img {
-  background-image: url(../img/city2.jpg);
+  background-image: url(../img/flat.jpg);
   background-size: cover;
   width: 100%;
   height: 550px;
@@ -129,7 +148,7 @@ i {
   z-index: 1;
   text-align: center;
   border: 4px solid #3498db;
-  margin-bottom: 35px;
+  margin-bottom: 55px;
   -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
   box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
@@ -140,8 +159,14 @@ i {
   color: #34495e;
 }
 
+.p {
+  font-size: 18px; 
+  color: #34495e;
+}
+
+
 #h4 {
-  color: #2980b9;
+  color: #3498db;
 }
 
 ////////// FORMS //////////
@@ -163,6 +188,94 @@ i {
 
 ////////// DONATIONS //////////
 .report-donations {
-  border: 4px solid #008cba;
-  padding: 10px;
+  border-top: 35px solid #80B929;
+  border-radius: 15px;
+  padding: 25px;
+  background: #7f8c8d;
+  margin-bottom: 55px;
+  /*
+  background-image: -webkit-gradient(
+    linear,
+      left top,
+        left bottom,
+          color-stop(0, #EDF5E0),
+            color-stop(1, #CFE5AE)
+            );
+            background-image: -o-linear-gradient(bottom, #EDF5E0 0%, #CFE5AE 100%);
+            background-image: -moz-linear-gradient(bottom, #EDF5E0 0%, #CFE5AE 100%);
+            background-image: -webkit-linear-gradient(bottom, #EDF5E0 0%, #CFE5AE 100%);
+            background-image: -ms-linear-gradient(bottom, #EDF5E0 0%, #CFE5AE 100%);
+            background-image: linear-gradient(to bottom, #EDF5E0 0%, #CFE5AE 100%);
+            */
+}
+
+.report-donations span {
+  font-family: 'Varela Round', sans-serif !important;
+  color: #ecf0f1;
+}
+
+.gravatar-img {
+  display: inline-block;
+  padding: 1px 25px;
+  margin: 1px 25px;
+  text-align: center;
+}
+
+.gravatar-img img {
+  border-radius: 20px !important;
+  border: 5px solid #80B929;
+}
+
+#email {
+  display: none;
+}
+
+#amount {
+  color: #80B929;
+  font-size: 22px;
+}
+
+h2 {
+  margin-bottom: 35px;
+  color: #ecf0f1;
+}
+
+.report-donations h4 {
+  font-family: 'Varela Round', sans-serif !important;
+  color: #ecf0f1;
+  text-transform: uppercase;
+  margin-top: 35px;
+}
+
+.report-donations p {
+  color: #ecf0f1;
+  font-size: 20px;
+}
+
+////////// HOME //////////
+
+#footer-panel {
+  border-top: 10px solid #80B929;
+  background-color: #3498db;
+  bottom: 0;
+  padding: 75px 0;
+  text-align: center;
+}
+
+#footer-panel li {
+  margin: 10px;
+  padding: 5px 20px;
+  display: inline;
+}
+
+#footer-panel a {
+  color: #ecf0f1;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+////////// HOME //////////
+
+.navbtn {
+  //border-top: -3px solid #80B929;
 }
