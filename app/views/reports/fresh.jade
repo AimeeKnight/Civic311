@@ -3,27 +3,29 @@ extends ../shared/template
 block content
   h1= title
 
-  form.dropzone(action='/reports', method='post', enctype='multipart/form-data')
-    label Name
-    input(type='text', name='name', required, autofocus='true')
-    label Address
-    input#complete(type='text', name='address', required)
-    input(type='hidden', name='lat')
-    input(type='hidden', name='lng')
-    label Description
-    textarea(name='description', required)
-    label Date
-    input(type='date', name='date', required)
-    br
-    label Confidential?
-    input(type="checkbox", name="visibility", checked=(true===false ? "checked" : undefined))
-    br
-    label Picture
-    input#dropzone-input(type='file', name='cover')
-    //.dropzone.dropzone-previews#my-awesome-dropzone
-    input(type='hidden', name='residentId')
-    br
-    button.small.radius#create Submit Report
+  form#forms.dropzone(action='/reports', method='post', enctype='multipart/form-data')
+    fieldset
+      legend=title
+      label Name
+      input(type='text', name='name', required, autofocus='true')
+      label Address
+      input#complete(type='text', name='address', required)
+      input(type='hidden', name='lat')
+      input(type='hidden', name='lng')
+      label Description
+      textarea(name='description', required)
+      label Date
+      input(type='date', name='date', required)
+      br
+      label Confidential?
+      input(type="checkbox", name="visibility", checked=(true===false ? "checked" : undefined))
+      br
+      label Picture
+      input#dropzone-input(type='file', name='cover')
+      //.dropzone.dropzone-previews#my-awesome-dropzone
+      input(type='hidden', name='residentId')
+      br
+      button.small.radius#create Submit Report
 
 block scripts
   script(src='/js/source/new-report.js')

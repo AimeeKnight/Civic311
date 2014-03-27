@@ -8,7 +8,7 @@ html(class='no-js', lang='en')
     link(rel='stylesheet', href='/css/normalize.css')
     link(rel='stylesheet', href='/css/foundation.css')
     link(rel='stylesheet', href='/less/app.css')
-    link(rel='stylesheet', href='/css/dropzone.css')
+    //link(rel='stylesheet', href='/css/dropzone.css')
     link(href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet")
     script(src='/js/vendor/modernizr.js')
   body
@@ -36,7 +36,8 @@ html(class='no-js', lang='en')
               li: a(href="/register") Register
               li.divider
             if !currentResident && !currentEmployee 
-              li: a(href="/login") Login
+              li: a(href="#" data-reveal-id="myModal2" data-reveal) Login
+              //li: a(href="/login") Login
               li.divider
             if !currentResident && !currentEmployee 
               li.has-form: a(href='/auth/facebook').button.radius.navbtn#fb Facebook Login
@@ -50,6 +51,17 @@ html(class='no-js', lang='en')
               li.has-form
                 form(action='/admin/logout'  method='POST' )
                   button.tiny.radius.space.navbtn Logout
+    .row
+      .small-12.columns
+        div#myModal2.reveal-modal.tiny(data-reveal)
+          .row
+            .small-12.columns
+              form(action='/login', method='post')
+                label.left Email
+                input(name='email', type='text', autofocus=true, required)
+                label.left Password
+                input(name='password', type='password' required)
+          a.close-reveal-modal &#215;
 
     .row#main
       .small-12.columns
