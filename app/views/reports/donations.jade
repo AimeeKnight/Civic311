@@ -8,14 +8,16 @@ block content
     .report-donations
       h2#h4 <i class='fa fa-flag'></i>
         &nbsp;
-        span= report.name
-      h4 Current Donations
-        p.p#amount
-          span $
-          &nbsp;
-          span= report.amount
-
-      h4 Donors
+        span 
+          a#donate(href='/reports/' + report._id)= report.name
+        br
+        br
+        span Total: 
+        span $
+        span= report.amount
+        br
+        br
+        span Donors:
 
       for donor in report.donors
         .gravatar-img
