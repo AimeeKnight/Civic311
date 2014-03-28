@@ -15,7 +15,9 @@ module.exports = function(req, res, next){
 };
 
 function load(app, fn){
-  var Resident = require('../models/resident');
+
+  var facebookCallback = require('../lib/passport-callback');
+  //var Resident = require('../models/resident');
 
   passport.serializeUser(function(user, done){
     done(null, user);
@@ -25,29 +27,12 @@ function load(app, fn){
     done(null, obj);
   });
 
+  // call passport.use passing in new FacebookStrategy
   passport.use(new FacebookStrategy({
       clientID: '505396282898918',
       clientSecret: key,
-      callbackURL: 'http://192.168.1.14:4009/auth/facebook/callback'
-    },
-
-    function(accessToken, refreshToken, profile, done){
-      process.nextTick(function() {
-
-        Resident.findByFacebookId(profile.id.toString(), function(user){
-          if(user){
-            return done(null, user);
-          }else{
-            var newResident = new Resident({});
-            newResident.facebookId = profile.id;
-            newResident.name = profile.displayName;
-            newResident.fbInsert(function(user){
-              return done(null, user);
-            });
-          }
-        });
-      });
-    }
+      callbackURL: 'http://192.168.11.98:4009/auth/facebook/callback'
+    }, facebookCallback
   ));
 
   var home = require('../routes/home');
