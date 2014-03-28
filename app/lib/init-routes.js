@@ -15,9 +15,7 @@ module.exports = function(req, res, next){
 };
 
 function load(app, fn){
-
   var facebookCallback = require('../lib/passport-callback');
-  //var Resident = require('../models/resident');
 
   passport.serializeUser(function(user, done){
     done(null, user);
