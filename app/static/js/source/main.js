@@ -10,6 +10,7 @@
     $('#complete').geocomplete();
     $('#donation').change(updateAmount);
     //$.fn.geocomplete('#complete');
+    $('#arch').arctext({radius: 1});
     /*
     Dropzone.options.myAwesomeDropzone = {
       previewsContainer: '.dropzone-previews',
