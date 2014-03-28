@@ -19,10 +19,13 @@
     findMyLocation();
     $('#search').click(clickSearch);
   }
-
+  
   function clickSearch(){
-    var limitVal = $('#limit').val();
-    window.location.href = ('/listings/?lat='+lat+'&lng='+lng+'&limit='+limitVal);
+    var url = '/reports/query?lat=' + lat + '&lng=' + lng;
+    window.location.href = url;
+    $.getJSON(url, function(data){
+      console.log(data);
+    });
   }
 
   function findMyLocation(){

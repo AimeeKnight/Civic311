@@ -5,10 +5,10 @@
   $(document).ready(initialize);
 
   function initialize(){
-    $(document).foundation();
-    $('#id-status').click(checkStatusById);
-    $('#complete').geocomplete();
-    $('#donation').change(updateAmount);
+    //$(document).foundation();
+    //$('#id-status').click(checkStatusById);
+    //$('#complete').geocomplete();
+    //$('#donation').change(updateAmount);
     getEmails();
     //$.fn.geocomplete('#complete');
     /*
@@ -23,7 +23,7 @@
     */
 
   }
-  
+
   function getEmails(){
     var emails = $('.email');
     var names = $('.donor-name');
@@ -48,6 +48,7 @@
     });
   }
 
+  /*
   function checkStatusById(){
     var idVal = $('#id-val').val();
     window.location.href = ('/reports/'+ idVal);
@@ -61,6 +62,7 @@
     $('#donate > script').attr('data-amount', donation);
     $('#donate > script').attr('src', 'https://checkout.stripe.com/checkout.js');
   }
+  */
 
 })();
 
