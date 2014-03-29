@@ -11,7 +11,7 @@ var key = process.env.STRIPE;
 //var gravatar = require('gravatar');
 
 exports.fresh = function(req, res){
-  res.renderPjax('reports/fresh', {title: 'New Report'});
+  res.render('reports/fresh', {title: 'New Report'});
 };
 
 exports.create = function(req, res, fn){
@@ -69,7 +69,7 @@ exports.update = function(req, res){
 
     Resident.findById(report.residentId.toString(), function(resident){
       var emailList = resident.email + ', '  + report.notifications.join(', ');
-      updateEmail.sendUpdate({to:emailList, name:resident.name, currentStatus:report.currentStatus}, function(err, body){
+      updateEmail.sendUpdate({to:emailList, name:resident.name, currentStatus:report.currentStatus, reportName:report.name}, function(err, body){
         report.update(function(){
           res.redirect('/reports/' + req.params.id);
         });

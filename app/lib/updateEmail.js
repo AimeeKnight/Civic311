@@ -6,7 +6,7 @@ var jade = require('jade');
 
 ////////// UPDATE //////////
 exports.sendUpdate = function(data, fn){
-  send({from:'admin@aimeemarieknight.us', to:data.to, currentStatus:data.currentStatus, name:data.name, subject:'Civic 311 Report Update', template:'update'}, fn);
+  send({from:'admin@aimeemarieknight.us', to:data.to, currentStatus:data.currentStatus, name:data.name, reportName:data.reportName, subject:'Civic 311 Report Update', template:'update'}, fn);
 };
 
 function send(data, fn){

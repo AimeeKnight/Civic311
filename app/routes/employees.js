@@ -3,11 +3,11 @@
 var Employee = require('../models/employee');
 
 exports.fresh = function(req, res){
-  res.renderPjax('employees/fresh', {title: 'Employee Registration'});
+  res.render('employees/fresh', {title: 'Employee Registration'});
 };
 
 exports.token = function(req, res){
-  res.renderPjax('employees/token', {title: 'Complete Your Registration'});
+  res.render('employees/token', {title: 'Complete Your Registration'});
 };
 
 exports.create = function(req, res){
@@ -19,11 +19,11 @@ exports.create = function(req, res){
       if(employee._id){
         res.redirect('/admin/confirm');
       }else{
-        res.renderPjax('employees/token', {title: 'Employee Registration'});
+        res.render('employees/token', {title: 'Employee Registration'});
       }
     });
   }else{
-    res.renderPjax('employees/token', {title: 'Employee Registration'});
+    res.render('employees/token', {title: 'Employee Registration'});
   }
 };
 
@@ -46,7 +46,7 @@ exports.confirmToken = function(req, res){
 };
 
 exports.login = function(req, res){
-  res.renderPjax('employees/login', {title: 'Employee Login'});
+  res.render('employees/login', {title: 'Employee Login'});
 };
 
 exports.authenticate = function(req, res){
@@ -59,7 +59,7 @@ exports.authenticate = function(req, res){
         });
       });
     }else{
-      res.renderPjax('employees/login', {title: 'Employee Login'});
+      res.render('employees/login', {title: 'Employee Login'});
     }
   });
 };
@@ -72,6 +72,6 @@ exports.logout = function(req, res){
 
 exports.show = function(req, res){
   Employee.findById(req.params.id, function(employee){
-    res.renderPjax('employees/show', {employee:employee});
+    res.render('employees/show', {employee:employee});
   });
 };
