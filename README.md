@@ -47,4 +47,3 @@ Civic Issue Reporting
 - Passport
 - OAuth
 - Stripe
-- Pjax

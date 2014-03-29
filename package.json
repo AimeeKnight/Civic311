@@ -27,9 +27,7 @@
     "passport":        "*",
     "passport-facebook": "*",
     "gravatar":          "*",
-    "stripe":            "*",
-    "express-pjax":      "*",
-    "dropzone":          "*"
+    "stripe":            "*"
   },
   "devDependencies": {
     "grunt":                "*",
