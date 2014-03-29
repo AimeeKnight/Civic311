@@ -14,13 +14,13 @@ Civic Issue Reporting
 - 2 Factor Administrative Authentication
 - Default Resident Registration and Login
 - Facebook Oauth Registration and Login
-- Non Emergancy Reports Generation with options for creating either private or public reports
+- Non Emergency Reports Generation with options for creating either private or public reports
 - Admin controls for responding to requests via Civic311 Admin Report page with automatic emails to the report creator and all subscribers
 - Admin controls for opening up a report to allow for donations
 - Geolocation for filtering by reports in your area
 - Report donations via Stripe
 
-_The folowing technologies were used in the creation of this app..._
+### Civic311 was created with the following technologies
 - Node.js
 - Express
 - MongoDB
