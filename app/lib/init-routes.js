@@ -29,7 +29,7 @@ function load(app, fn){
   passport.use(new FacebookStrategy({
       clientID: '505396282898918',
       clientSecret: key,
-      callbackURL: 'http://192.168.11.98:4009/auth/facebook/callback'
+      callbackURL: 'http://192.168.1.14:4009/auth/facebook/callback'
     }, facebookCallback
   ));
 
