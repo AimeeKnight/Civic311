@@ -11,7 +11,7 @@ Civic Issue Reporting
 
 ### Civic 311 supports the following features
 
-- 2 Factor Administrative Authentication
+- Two Factor Administrative Authentication
 - Default Resident Registration and Login
 - Facebook Oauth Registration and Login
 - Non Emergency Reports Generation with options for creating either private or public reports
