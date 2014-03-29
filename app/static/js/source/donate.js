@@ -21,7 +21,6 @@
       maxFilesize: 1
     };
     */
-
   }
 
   function getEmails(){

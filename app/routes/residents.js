@@ -4,12 +4,12 @@ var Resident = require('../models/resident');
 var gravatar = require('gravatar');
 
 exports.fresh = function(req, res){
-  res.render('residents/fresh', {title: 'Resident Registration'});
+  res.renderPjax('residents/fresh', {title: 'Resident Registration'});
 };
 
 exports.fbInfo = function(req, res){
   if (req.user && req.user.email === null){
-    res.render('residents/update', {title: 'Please submit your email to receive notifications', fbResident:req.user});
+    res.renderPjax('residents/update', {title: 'Please submit your email to receive notifications', fbResident:req.user});
   }else{
     res.redirect('/');
   }
@@ -31,13 +31,13 @@ exports.create = function(req, res){
     if(resident._id){
       res.redirect('/');
     }else{
-      res.render('residents/fresh', {title: 'Resident Registration'});
+      res.renderPjax('residents/fresh', {title: 'Resident Registration'});
     }
   });
 };
 
 exports.login = function(req, res){
-  res.render('residents/login', {title: 'Resident Login'});
+  res.renderPjax('residents/login', {title: 'Resident Login'});
 };
 
 exports.logout = function(req, res){
@@ -56,7 +56,7 @@ exports.authenticate = function(req, res){
         });
       });
     }else{
-      res.render('residents/login', {title: 'Resident Login'});
+      res.renderPjax('residents/login', {title: 'Resident Login'});
     }
   });
 };
@@ -64,6 +64,6 @@ exports.authenticate = function(req, res){
 exports.show = function(req, res){
   Resident.findById(req.params.id, function(resident){
     var url = gravatar.url(resident.email, {s: '200', r: 'pg'});
-    res.render('residents/show', {resident:resident, gravatar: url});
+    res.renderPjax('residents/show', {resident:resident, gravatar: url});
   });
 };

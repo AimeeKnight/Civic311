@@ -13,8 +13,12 @@ var initRoutes = require('./lib/init-routes');
 var lookupResident = require('./lib/lookup-resident');
 var lookupEmployee = require('./lib/lookup-employee');
 var bounce = require('./lib/bounce');
+var pjax     = require('express-pjax');
 
 var app = express();
+app.configure(function() {
+  app.use(pjax());
+});
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 

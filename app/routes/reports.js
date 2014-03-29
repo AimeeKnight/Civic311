@@ -11,7 +11,7 @@ var key = process.env.STRIPE;
 //var gravatar = require('gravatar');
 
 exports.fresh = function(req, res){
-  res.render('reports/fresh', {title: 'New Report'});
+  res.renderPjax('reports/fresh', {title: 'New Report'});
 };
 
 exports.create = function(req, res, fn){
