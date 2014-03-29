@@ -7,7 +7,7 @@ Civic Issue Reporting
 [![Dependency Status](https://gemnasium.com/AimeeKnight/Civic311.svg)](https://gemnasium.com/AimeeKnight/Civic311)
 
 - - -
-<p>An app discussed while attending the National Day of Civic Hacking, <a href='civic311.aimeemarieknight.us'><strong>Civic 311</strong></a> connects residents with their local government.</p>
+<p>An app discussed while attending the National Day of Civic Hacking, <a href='http://www.civic311.aimeemarieknight.us'><strong>Civic 311</strong></a> connects residents with their local government.</p>
 
 ### Civic 311 supports the following features
 
