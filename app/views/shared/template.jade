@@ -8,9 +8,7 @@ html(class='no-js', lang='en')
     link(rel='stylesheet', href='/css/normalize.css')
     link(rel='stylesheet', href='/css/foundation.css')
     link(rel='stylesheet', href='/less/app.css')
-    //link(rel='stylesheet', href='/css/dropzone.css')
     link(href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet")
-    link(rel='stylesheet', href='/css/font-awesome-animation.css')
     script(src='/js/vendor/modernizr.js')
   body
     .sticky.fixed
@@ -38,7 +36,6 @@ html(class='no-js', lang='en')
               li.divider
             if !currentResident && !currentEmployee 
               li: a(href="#" data-reveal-id="myModal2" data-reveal) Login
-              //li: a(href="/login") Login
               li.divider
             if !currentResident && !currentEmployee 
               li.has-form: a(href='/auth/facebook').button.radius.navbtn#fb Facebook Login
@@ -77,6 +74,7 @@ html(class='no-js', lang='en')
           li: a(href="/admin/register") Admin Registration
           li: a(href="/admin/login") Admin Login
           li: a(href="/admin/confirm") Token Confirmation
+          li: a(href="/update") Add My Email
           li: a(href="#") Terms
 
     script(src='/js/vendor/jquery.js')
@@ -90,6 +88,5 @@ html(class='no-js', lang='en')
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAg7BExWsO3xkC80yWGVtWKCrA_eFr-M34&sensor=true&libraries=places')
     script(src='/js/vendor/jquery.geocomplete.min.js')
     script(src='/js/vendor/js/jquery.arctext.js')
-    //script(src='/js/vendor/dropzone.js')
     block scripts
 

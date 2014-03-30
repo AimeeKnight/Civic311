@@ -17,6 +17,8 @@ block content
 
         script.
           var place = {};
+          place.name = '#{report.name}';
+          place.id = '#{report._id}';
           place.address = '#{report.address}';
           place.lat = #{report.coordinates[0]};
           place.lng = #{report.coordinates[1]};

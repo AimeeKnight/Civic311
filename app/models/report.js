@@ -18,7 +18,7 @@ function Report(report){
   }else{
     this.visibility = 'public';
   }
-  this.currentStatus = report.currentStatus || 'Waiting on response';
+  this.currentStatus = report.currentStatus || 'Waiting on response.';
   this.employeeId = report.employeeId || null;
   this.residentId = report.residentId || null;
   this.description = report.description || null;
