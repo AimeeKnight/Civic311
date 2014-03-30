@@ -11,16 +11,6 @@
     $('#donation').change(updateAmount);
     //$.fn.geocomplete('#complete');
     $('#arch').arctext({radius: 1});
-    /*
-    Dropzone.options.myAwesomeDropzone = {
-      previewsContainer: '.dropzone-previews',
-      autodiscover: false,
-      autoProcessQueue: false,
-      paramName: 'cover',
-      dictDefaultMessage: 'Drag your images',
-      maxFilesize: 1
-    };
-    */
   }
 
   function checkStatusById(){

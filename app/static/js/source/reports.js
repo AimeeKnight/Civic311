@@ -13,15 +13,12 @@
   var image = '../img/pin.png';
 
   function initialize(){
-    ////////// A
     initMap(36, -86, 5);
 
-    ////////// C
     for(var i = 0; i < places.length; i++){
       addMarker(places[i]);
     }
 
-    ////////// 1
     findMyLocation();
     $('#search').click(clickSearch);
   }
@@ -34,18 +31,15 @@
     });
   }
 
-  ////////// 2
   function findMyLocation(){
     getLocation();
   }
 
-  ////////// 3
   function getLocation(){
     var geoOptions = {enableHighAccuracy: true, maximumAge: 1000, timeout: 60000};
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
   }
 
-  ////////// 4
   function geoSuccess(location) {
     console.log('lat', lat);
     console.log('lng', lng);
@@ -55,18 +49,15 @@
     $('#search').show();
   }
 
-  ////////// 4
   function geoError() {
     console.log('Sorry, no position available.');
   }
 
-  ////////// B
   function initMap(lat, lng, zoom){
     var mapOptions = {center: new google.maps.LatLng(lat, lng), zoom: zoom, mapTypeId: google.maps.MapTypeId.ROADMAP, styles:styleArray};
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
   }
 
-  ////////// D
   function addMarker(location){
     var contentString = '<p id="#">' + location.name + '</p>';
     var infowindow = new google.maps.InfoWindow({
