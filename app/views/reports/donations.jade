@@ -18,13 +18,14 @@ block content
         br
         span#donor-pics Donors:
 
-      .gravatar-img
       for donor in report.donors
-        .donor-name= donor.donorName
-        .email= donor.donorEmail
+        .donor-box
+          .donor-name
+            p= donor.donorName
+            img(src= donor.donorEmail).donor-email
 
 block scripts
   script(src='/js/vendor/md5.js')
   script(src='/js/vendor/jquery.gravatar.js')
-  script(src='/js/source/donate.js')
+  //script(src='/js/source/donate.js')
 

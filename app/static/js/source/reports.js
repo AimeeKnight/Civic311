@@ -14,7 +14,7 @@
 
   function initialize(){
     ////////// A
-    initMap(36, -86, 5);
+    initMap(36, -86, 9);
 
     ////////// C
     for(var i = 0; i < places.length; i++){
