@@ -7,8 +7,9 @@ var Mongo = require('mongodb');
 var idEmail = require('../lib/idEmail');
 var updateEmail = require('../lib/updateEmail');
 var _ = require('lodash');
-var key = process.env.STRIPE;
-//var gravatar = require('gravatar');
+var key = 'sk_test_dg06Wz5DzRUxU9jiPOF7iPup';
+//var key = process.env.STRIPE;
+var gravatar = require('gravatar');
 
 exports.fresh = function(req, res){
   res.render('reports/fresh', {title: 'New Report'});
@@ -112,7 +113,10 @@ exports.donate = function(req, res){
   var newDonor = {};
   newDonor.donorId = new Mongo.ObjectID(req.body.donorId);
   newDonor.donorName = req.body.donorName;
-  newDonor.donorEmail = req.body.donorEmail;
+
+  var url = gravatar.url(req.body.donorEmail, {s: '200', r: 'pg'});
+  newDonor.donorEmail = url;
+  //newDonor.donorEmail = req.body.donorEmail;
 
   stripe.charges.create({
     amount: req.body.amount,

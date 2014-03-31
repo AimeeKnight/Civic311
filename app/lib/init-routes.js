@@ -3,7 +3,7 @@ var d = require('../lib/request-debug');
 var passport = require('passport');
 var initialized = false;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var key = process.env.FB;
+//var key = process.env.FB;
 
 module.exports = function(req, res, next){
   if(!initialized){
@@ -28,8 +28,9 @@ function load(app, fn){
   // call passport.use passing in new FacebookStrategy
   passport.use(new FacebookStrategy({
       clientID: '505396282898918',
-      clientSecret: key,
-      callbackURL: 'http://192.168.1.14:4009/auth/facebook/callback'
+      //clientSecret: key,
+      clientSecret: '259ed1c9dd1379dd76e6c56753c651b6',
+      callbackURL: 'http://civic311.aimeemarieknight.us/auth/facebook/callback'
     }, facebookCallback
   ));
 

@@ -13,7 +13,8 @@
   var image = '../img/pin.png';
 
   function initialize(){
-    initMap(36, -86, 5);
+    ////////// A
+    initMap(36, -86, 9);
 
     for(var i = 0; i < places.length; i++){
       addMarker(places[i]);

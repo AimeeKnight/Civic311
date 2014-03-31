@@ -231,6 +231,8 @@ describe('reports', function(){
           .post('/reports/donate/' + reportId)
           .set('cookie', cookie)
           .field('amount', 15)
+          .field('donorName', 'Aimee')
+          .field('donorEmail', 'aimee@example.com')
           .end(function(err, res){
             expect(res.status).to.equal(302);
             expect(res.text).to.equal('Moved Temporarily. Redirecting to /reports/' + reportId);
