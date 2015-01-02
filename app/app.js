@@ -5,7 +5,6 @@ var port = process.env.PORT || 4000;
 
 var express    = require('express');
 var passport = require('passport');
-//var pjax     = require('express-pjax');
 var less       = require('express-less');
 var session    = require('express-session');
 var RedisStore = require('connect-redis')(session);
@@ -18,9 +17,7 @@ var bounce = require('./lib/bounce');
 var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-//app.use(pjax());
 
-/* --- pipeline begins */
 app.use(initMongo.connect);
 app.use(initRoutes);
 app.use(express.logger(':remote-addr -> :method :url [:status]'));
@@ -41,7 +38,6 @@ app.use(lookupResident);
 app.use(lookupEmployee);
 app.use(bounce);
 app.use(app.router);
-/* --- pipeline ends   */
 
 var server = require('http').createServer(app);
 server.listen(port, function(){
